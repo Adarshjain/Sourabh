@@ -2,24 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d218d6de-e362-4cde-a041-449548d6310f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Sourabh.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Admin.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Admin/AdminArea.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Admin/Category.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Admin/DataEntry.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Admin/Nav.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Admin/Spreadsheet.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Admin/SubCategory.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Routers/routing.native.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Routers/routing.web.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +29,6 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -76,12 +61,15 @@
       <workItem from="1587567085141" duration="4687000" />
       <workItem from="1587647189292" duration="11714000" />
       <workItem from="1587727440339" duration="1776000" />
-      <workItem from="1587732909083" duration="22774000" />
+      <workItem from="1587732909083" duration="25002000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -123,9 +111,9 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="540" y="281" width="600" height="488" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1587807852681" />
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1587810354741">
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1587815913056">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1587810354741" />
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1587815913056" />
   </component>
 </project>
