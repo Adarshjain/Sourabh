@@ -1,3 +1,3 @@
-import {render} from './App';
+import {render} from './HybridApp';
 
 render()

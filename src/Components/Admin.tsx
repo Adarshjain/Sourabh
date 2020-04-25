@@ -6,7 +6,7 @@ import {AdminArea} from "./Admin/AdminArea";
 
 const Admin = (props) => {
     return (
-        <Layout style={styles.container}>
+        <Layout>
             <View style={styles.nav}><Nav/></View>
             <View><AdminArea {...props}/></View>
         </Layout>
