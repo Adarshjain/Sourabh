@@ -1,6 +1,5 @@
 import {Layout, Text} from "@ui-kitten/components";
 import React from "react";
-import {StyleSheet} from "react-native";
 
 const Category = () => {
     return (
@@ -13,6 +12,5 @@ const Category = () => {
 }
 export default Category;
 
-const styles = StyleSheet.create({});
 
 

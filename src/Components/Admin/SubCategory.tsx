@@ -1,6 +1,5 @@
 import {Layout, Text} from "@ui-kitten/components";
 import React from "react";
-import {StyleSheet} from "react-native";
 
 const SubCategory = () => {
     return (
@@ -13,6 +12,5 @@ const SubCategory = () => {
 }
 export default SubCategory;
 
-const styles = StyleSheet.create({});
 
 
