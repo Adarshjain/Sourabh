@@ -6,7 +6,7 @@ const Category = () => {
         <Layout>
             {/*<View style={styles.nav}><Nav/></View>*/}
             {/*<View style={styles.nav}><Nav/></View>*/}
-            <Text>Category</Text>
+            <Text>Category.</Text>
         </Layout>
     )
 }
