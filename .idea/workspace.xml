@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d218d6de-e362-4cde-a041-449548d6310f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/precache-manifest.f60145d6efbb47f6a0eedaf5fea4bbf1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.428ac144.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.428ac144.chunk.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.428ac144.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.15e371b5.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.15e371b5.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Admin/AdminArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Admin/AdminArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Admin/Category.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Admin/Category.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Admin/DataEntry.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Admin/DataEntry.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Admin/SubCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Admin/SubCategory.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +64,7 @@
       <workItem from="1587567085141" duration="4687000" />
       <workItem from="1587647189292" duration="11714000" />
       <workItem from="1587727440339" duration="1776000" />
-      <workItem from="1587732909083" duration="34652000" />
+      <workItem from="1587732909083" duration="35377000" />
     </task>
     <servers />
   </component>
