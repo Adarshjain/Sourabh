@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d218d6de-e362-4cde-a041-449548d6310f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="d218d6de-e362-4cde-a041-449548d6310f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +36,9 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
+  <component name="ReadonlyStatusHandler">
+    <option name="SHOW_DIALOG" value="false" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -64,7 +64,7 @@
       <workItem from="1587567085141" duration="4687000" />
       <workItem from="1587647189292" duration="11714000" />
       <workItem from="1587727440339" duration="1776000" />
-      <workItem from="1587732909083" duration="35377000" />
+      <workItem from="1587732909083" duration="35733000" />
     </task>
     <servers />
   </component>
@@ -118,5 +118,9 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1587830571605" />
+    <state x="570" y="374" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1587831657158">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="570" y="374" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1587831657158" />
   </component>
 </project>
