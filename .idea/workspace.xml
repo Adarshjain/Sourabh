@@ -17,7 +17,6 @@
       <change afterPath="$PROJECT_DIR$/build/static/js/runtime-main.53d4d795.js.map" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Routers/routing.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/react-app-env.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/webpack.config.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -83,7 +82,7 @@
       <workItem from="1587567085141" duration="4687000" />
       <workItem from="1587647189292" duration="11714000" />
       <workItem from="1587727440339" duration="1776000" />
-      <workItem from="1587732909083" duration="34055000" />
+      <workItem from="1587732909083" duration="34360000" />
     </task>
     <servers />
   </component>
