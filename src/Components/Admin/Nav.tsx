@@ -16,7 +16,6 @@ export const Nav = () => {
             history.replace(i);
             loc.pathname = i;
         }
-        console.log('sdf');
         let indexPath: IndexPath = new IndexPath(AdminRoutes.getIndexFromPath(loc.pathname));
         setSelectedIndex(indexPath);
     }, [loc.pathname, history]);

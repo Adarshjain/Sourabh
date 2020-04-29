@@ -6,7 +6,7 @@ import {DocumentNode} from "graphql";
 
 export default function GqlQueryWrapper<T>(Component, gqlQuery: DocumentNode, ...props) {
 
-    return () => {
+    return function GqlQueryWrapperInner() {
         const {loading, error, data} = useQuery<T>(gqlQuery);
         if (loading) {
             return <AdminLoading/>
@@ -14,7 +14,6 @@ export default function GqlQueryWrapper<T>(Component, gqlQuery: DocumentNode, ..
         if (error) {
             return <AdminError/>
         }
-
         return <Component {...props} data={data}/>
     }
 }
