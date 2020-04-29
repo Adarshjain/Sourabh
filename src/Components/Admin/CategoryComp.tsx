@@ -1,27 +1,26 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {StyleSheet, View} from "react-native";
 import {useMutation} from "@apollo/react-hooks";
 import {Category as CategoryInterface, CategoryInput, GQLInput} from "../../types";
 import Category from "../Common/Category";
 import {FETCH_CATEGORIES, UPDATE_CATEGORY} from "../../Network/schemaFormats";
-import AddCategory from "./AddCategory";
-import {Text} from "@ui-kitten/components";
+import CategoryCRUD from "./CategoryCRUD";
+import {Button, Text} from "@ui-kitten/components";
 import GqlQueryWrapper from "../Common/GqlQueryWrapper";
 
+interface CategoryResponse {
+    data: { categories: CategoryInterface[] }
+}
 
-export default GqlQueryWrapper<{ categories: CategoryInterface[] }>(CategoryComp, FETCH_CATEGORIES);
+export default GqlQueryWrapper(CategoryComp, FETCH_CATEGORIES);
 
-function CategoryComp({data}: { data: { categories: CategoryInterface[] } }) {
-
+function CategoryComp({data: {categories}}: CategoryResponse) {
+    const [visible, setVisible] = React.useState(false);
     const [updateCategory] = useMutation<{ updateCategory: CategoryInterface }, GQLInput<CategoryInput>>(UPDATE_CATEGORY);
-    const [categories, updateCategories] = useState<CategoryInterface[]>([])
-    useEffect(() => {
-        if (data && data.categories) {
-            updateCategories(data.categories);
-        }
-    }, [data])
+    const [internalCategories, updateCategories] = useState<CategoryInterface[]>(categories || []);
 
     async function onCategoryAdd({name, orderOfDisplay, file}) {
+        setVisible(false);
         let category = await updateCategory({
             variables: {
                 input: {
@@ -40,12 +39,22 @@ function CategoryComp({data}: { data: { categories: CategoryInterface[] } }) {
         <View>
             <View style={styles.header}>
                 <Text category="h5">Category</Text>
-                <AddCategory onPrimaryAction={onCategoryAdd}/>
+                <Button size="medium" onPress={() => setVisible(true)}>Add Category</Button>
+                {
+                    visible &&
+                    <CategoryCRUD onSecondaryAction={() => setVisible(false)} onPrimaryAction={onCategoryAdd}/>
+                }
             </View>
             <View style={styles.cardsContainer}>
                 {
-                    categories.map(category =>
-                        <Category {...category} key={category.id} disabled={true}/>
+                    internalCategories.map(category =>
+                        <View>
+                            <Category {...category} key={category.id} disabled={true}/>
+                            <View style={{flexDirection: "row", justifyContent: "space-around"}}>
+                                <Button size="small" status="basic" onPress={() => setVisible(true)}>Edit</Button>
+                                <Button size="small" status="basic" onPress={() => setVisible(true)}>Delete</Button>
+                            </View>
+                        </View>
                     )
                 }
             </View>

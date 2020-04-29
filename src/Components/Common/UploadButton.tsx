@@ -1,7 +1,7 @@
 import React from "react";
 import {Button} from "@ui-kitten/components";
 
-export default (props) =>
+export default ({status, onChange, ...props}) =>
     <label>
         <input type="file" style={{
             width: 1,
@@ -10,6 +10,6 @@ export default (props) =>
             overflow: "hidden",
             position: "absolute",
             zIndex: -1
-        }} onChange={props.onChange}/>
-        <Button {...props} >{props.children}</Button>
+        }} onChange={onChange}/>
+        <Button status={status} {...props} >{props.children}</Button>
     </label>
