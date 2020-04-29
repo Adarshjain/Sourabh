@@ -1,31 +1,25 @@
 import React, {useEffect, useState} from "react";
 import {StyleSheet, View} from "react-native";
-import {useMutation, useQuery} from "@apollo/react-hooks";
+import {useMutation} from "@apollo/react-hooks";
 import {Category as CategoryInterface, CategoryInput, GQLInput} from "../../types";
 import Category from "../Common/Category";
-import AdminLoading from "./AdminLoading";
-import AdminError from "./AdminError";
 import {FETCH_CATEGORIES, UPDATE_CATEGORY} from "../../Network/schemaFormats";
 import AddCategory from "./AddCategory";
 import {Text} from "@ui-kitten/components";
+import GqlQueryWrapper from "../Common/GqlQueryWrapper";
 
-export default function CategoryComp() {
 
-    const {loading, error, data} = useQuery<{ categories: CategoryInterface[] }>(FETCH_CATEGORIES);
+export default GqlQueryWrapper<{ categories: CategoryInterface[] }>(CategoryComp, FETCH_CATEGORIES);
+
+function CategoryComp({data}: { data: { categories: CategoryInterface[] } }) {
+
     const [updateCategory] = useMutation<{ updateCategory: CategoryInterface }, GQLInput<CategoryInput>>(UPDATE_CATEGORY);
-    // let categories: CategoryInterface[] = [];
     const [categories, updateCategories] = useState<CategoryInterface[]>([])
     useEffect(() => {
         if (data && data.categories) {
             updateCategories(data.categories);
         }
     }, [data])
-    if (loading) {
-        return <AdminLoading/>
-    }
-    if (error) {
-        return <AdminError/>
-    }
 
     async function onCategoryAdd({name, orderOfDisplay, file}) {
         let category = await updateCategory({
