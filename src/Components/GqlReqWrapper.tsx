@@ -1,2 +1,2 @@
-const a = "aljnf skdjksdjbfkj";
+const a = "aljnf skdjksdjbfk
 export default a;
