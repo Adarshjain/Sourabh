@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d218d6de-e362-4cde-a041-449548d6310f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_redirects" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Admin/Nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Admin/Nav.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +90,7 @@
       <workItem from="1587727440339" duration="1776000" />
       <workItem from="1587732909083" duration="81099000" />
       <workItem from="1587992055281" duration="19417000" />
-      <workItem from="1588153936192" duration="4460000" />
+      <workItem from="1588153936192" duration="5116000" />
     </task>
     <servers />
   </component>
@@ -115,10 +112,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1587754834610" />
-    <state x="572" y="334" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587880556932">
+    <state x="572" y="334" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588165959299">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="572" y="334" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1587880556932" />
+    <state x="572" y="334" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1588165959299" />
     <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1587967303456">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
