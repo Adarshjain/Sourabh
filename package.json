@@ -8,15 +8,19 @@
     "eject": "expo eject",
     "start-web": "react-scripts start",
     "build-web": "react-scripts build",
-    "b-s": "yarn build-web && serve -s build/"
+    "b-s": "yarn build-web && serve -s build/",
+    "gql": "gql-gen"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.5",
     "@eva-design/eva": "^2.0.0-alpha.1",
     "@expo/webpack-config": "^0.12.1",
     "@types/react-router-dom": "^5.1.4",
     "@ui-kitten/components": "^5.0.0-alpha.1",
     "@ui-kitten/eva-icons": "^5.0.0-alpha.1",
+    "apollo-boost": "^0.4.7",
     "expo": "~37.0.3",
+    "graphql": "^15.0.0",
     "react": "~16.9.0",
     "react-art": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -32,6 +36,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "@graphql-codegen/cli": "^1.13.3",
+    "@graphql-codegen/typescript": "^1.13.3",
+    "@graphql-codegen/typescript-operations": "^1.13.3",
     "@types/react": "~16.9.23",
     "@types/react-dom": "^16.9.6",
     "@types/react-native": "~0.61.17",

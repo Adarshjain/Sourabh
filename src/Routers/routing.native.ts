@@ -1,9 +1,16 @@
 export {
     NativeRouter as Router,
-    Switch,
+    matchPath,
+    MemoryRouter,
+    Prompt,
+    Redirect,
     Route,
-    Link,
+    StaticRouter,
+    Switch,
+    withRouter,
     useHistory,
+    useLocation,
+    useParams,
     useRouteMatch,
-    useParams
+    Link
 } from 'react-router-native';

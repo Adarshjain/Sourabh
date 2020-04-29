@@ -1,0 +1,57 @@
+type Query {
+    categories: [Category]!
+    secondCategories(category: String): [SecondCategory]!
+    thirdCategories(secondCategory: String): [ThirdCategory]!
+}
+
+type Mutation {
+    updateCategory(input:CategoryInput): Category
+}
+
+type Category {
+    id: String!
+    name: String!
+    imageUrl: String!
+}
+
+type SecondCategory {
+    id: String!
+    name: String!
+    imageUrl: String!
+    category: Category!
+}
+
+type ThirdCategory {
+    id: String!
+    name: String!
+    imageUrl: String!
+    secondCategory: SecondCategory!
+}
+
+type Product {
+    Name: String
+    Category: Category!
+    secondCategory: SecondCategory!
+    thirdCategory: ThirdCategory
+    Price: Int
+    favorite: Boolean
+    images: [String]
+    Weight: UnitValueObj
+    Purity: UnitValueObj
+    Gender: String
+    Size: String
+    isOnDiscount: Boolean
+    isHallmark: Boolean
+    isHidden: Boolean
+}
+
+type UnitValueObj {
+    unit: String
+    value: Int
+}
+
+input CategoryInput {
+    name: String!
+    imageUrl: String!
+    orderOfDisplay: Int
+}

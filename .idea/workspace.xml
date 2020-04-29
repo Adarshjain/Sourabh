@@ -2,12 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d218d6de-e362-4cde-a041-449548d6310f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Components/Admin/Category.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Admin/Category.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/codegen.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schema.faker.graphql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Admin/AddCategory.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Admin/AdminError.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Admin/AdminLoading.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Admin/CategoryComp.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Common/Category.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Common/UploadButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/GqlReqWrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Network/Apollo/client.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Network/PrependInterfaces.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Network/schema.graphql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Network/schemaFormats.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Routers/AdminRoutes.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Admin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Admin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Admin/AdminArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Admin/AdminArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Admin/Category.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Admin/Nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Admin/Nav.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HybridApp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/HybridApp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routers/routing.native.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routers/routing.native.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routers/routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routers/routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routers/routing.web.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routers/routing.web.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="GraphQL File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -28,6 +61,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JavaScript" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -36,6 +70,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="ReadonlyStatusHandler">
@@ -47,11 +82,22 @@
       <recent name="$PROJECT_DIR$/web" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Network" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/web" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/Routers" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="scratch_6.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$APPLICATION_CONFIG_DIR$/scratches/scratch_6.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.scratch_6.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -66,7 +112,9 @@
       <workItem from="1587567085141" duration="4687000" />
       <workItem from="1587647189292" duration="11714000" />
       <workItem from="1587727440339" duration="1776000" />
-      <workItem from="1587732909083" duration="46889000" />
+      <workItem from="1587732909083" duration="81099000" />
+      <workItem from="1587992055281" duration="19417000" />
+      <workItem from="1588153936192" duration="3246000" />
     </task>
     <servers />
   </component>
@@ -80,46 +128,66 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="725" y="395" key="#Notifications" timestamp="1588156488142">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="725" y="395" key="#Notifications/0.0.1680.1050@0.0.1680.1050" timestamp="1588156488142" />
     <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587754834610">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1587754834610" />
-    <state x="572" y="334" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587747346950">
+    <state x="572" y="334" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587880556932">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="572" y="334" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1587747346950" />
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1587819470123">
+    <state x="572" y="334" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1587880556932" />
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1587967303456">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1587819470123" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1587819470121">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1587967303456" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1587967303453">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1587819470121" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1587819470119">
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1587967303453" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1587967303450">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1587819470119" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1587819470121">
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1587967303450" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1587967303454">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1587819470121" />
-    <state width="500" height="445" key="SwitcherDM" timestamp="1587747329767">
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1587967303454" />
+    <state x="428" y="275" key="IDE.errors.dialog" timestamp="1588006900305">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="500" height="445" key="SwitcherDM/0.0.1680.1050@0.0.1680.1050" timestamp="1587747329767" />
-    <state x="438" y="142" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1587806812852">
+    <state x="428" y="275" key="IDE.errors.dialog/0.0.1680.1050@0.0.1680.1050" timestamp="1588006900305" />
+    <state x="349" y="164" key="SettingsEditor" timestamp="1587992402704">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="438" y="142" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1587806812852" />
-    <state x="540" y="281" width="600" height="488" key="find.popup" timestamp="1587829789263">
+    <state x="349" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1587992402704" />
+    <state width="500" height="445" key="SwitcherDM" timestamp="1588012650772">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="540" y="281" width="600" height="488" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1587829789263" />
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1587841547923">
+    <state width="500" height="445" key="SwitcherDM/0.0.1680.1050@0.0.1680.1050" timestamp="1588012650772" />
+    <state x="692" y="446" key="VCS.ChangelistChooser" timestamp="1587918251240">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1587841547923" />
+    <state x="692" y="446" key="VCS.ChangelistChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1587918251240" />
+    <state x="438" y="142" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1588004654002">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="438" y="142" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1588004654002" />
+    <state x="540" y="281" width="600" height="488" key="find.popup" timestamp="1587917389117">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="540" y="281" width="600" height="488" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1587917389117" />
+    <state x="505" y="248" key="run.anything.popup" timestamp="1587916222017">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="505" y="248" key="run.anything.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1587916222017" />
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1588012356487">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1588012356487" />
     <state x="570" y="374" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1587831657158">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

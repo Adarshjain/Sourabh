@@ -8,7 +8,7 @@ const Admin = (props) => {
     return (
         <Layout style={styles.container}>
             <View style={styles.nav}><Nav/></View>
-            <View><AdminArea {...props}/></View>
+            <View style={styles.adminArea}><AdminArea {...props}/></View>
         </Layout>
     )
 }
@@ -30,7 +30,13 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 1,
         shadowRadius: 20,
-        shadowColor: "rgb(218,224,235)"
+        shadowColor: "rgb(218,224,235)",
+        zIndex: 100
+    },
+    adminArea: {
+        flex: 1,
+        maxHeight: "100vh",
+        overflow: "scroll"
     }
 });
 
