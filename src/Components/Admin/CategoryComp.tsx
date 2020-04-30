@@ -3,10 +3,12 @@ import {StyleSheet, View} from "react-native";
 import {useMutation} from "@apollo/react-hooks";
 import {Category as CategoryInterface, CategoryInput, GQLInput} from "../../types";
 import Category from "../Common/Category";
-import {FETCH_CATEGORIES, UPDATE_CATEGORY} from "../../Network/schemaFormats";
-import CategoryCRUD from "./CategoryCRUD";
+import {DELETE_CATEGORY, FETCH_CATEGORIES, UPDATE_CATEGORY} from "../../Network/schemaFormats";
+import CategoryEdit from "./CategoryEdit";
 import {Button, Text} from "@ui-kitten/components";
 import GqlQueryWrapper from "../Common/GqlQueryWrapper";
+import {getSplicedArray, pushToArray, replaceArrayAt} from "../../Helpers";
+import ConfirmationPopup from "./ConfirmationPopup";
 
 interface CategoryResponse {
     data: { categories: CategoryInterface[] }
@@ -15,49 +17,122 @@ interface CategoryResponse {
 export default GqlQueryWrapper(CategoryComp, FETCH_CATEGORIES);
 
 function CategoryComp({data: {categories}}: CategoryResponse) {
-    const [visible, setVisible] = React.useState(false);
-    const [updateCategory] = useMutation<{ updateCategory: CategoryInterface }, GQLInput<CategoryInput>>(UPDATE_CATEGORY);
+    const [isEditPopupVisible, setIsEditPopupVisible] = React.useState(false);
     const [internalCategories, updateCategories] = useState<CategoryInterface[]>(categories || []);
+    const [currentCategory, setCurrentCategory] = useState<CategoryInterface | undefined>(undefined);
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+    const [updateCategory] = useMutation<{ updateCategory: CategoryInterface }, GQLInput<CategoryInput>>(UPDATE_CATEGORY);
+    const [deleteCategory] = useMutation<{ deleteCategory: boolean }, GQLInput<string>>(DELETE_CATEGORY);
 
-    async function onCategoryAdd({name, orderOfDisplay, file}) {
-        setVisible(false);
+    async function onCategoryUpdate(tempCategory: CategoryInput) {
+        setIsEditPopupVisible(false);
+        if (!!currentCategory) {
+            tempCategory.id = currentCategory.id;
+        }
         let category = await updateCategory({
-            variables: {
-                input: {
-                    name,
-                    orderOfDisplay,
-                    imageUrl: file.name
-                }
-            }
+            variables: {input: tempCategory}
         });
         if (category.data !== undefined && category.data.updateCategory !== undefined) {
-            updateCategories(categories => [...categories, category.data!.updateCategory])
+            if (!!currentCategory) {
+                let foundIndex = internalCategories.findIndex(cat => cat.id === currentCategory.id)
+                updateCategories(replaceArrayAt(internalCategories, foundIndex, category.data!.updateCategory))
+            } else {
+                updateCategories(pushToArray(internalCategories, category.data!.updateCategory))
+            }
         }
+        setCurrentCategory(undefined);
+    }
+
+    function onEditAction(category: CategoryInterface) {
+        setCurrentCategory(category);
+        setIsEditPopupVisible(true);
+    }
+
+    function onEditCancel() {
+        setCurrentCategory(undefined);
+        setIsEditPopupVisible(false);
+    }
+
+    async function onDeleteAction(category: CategoryInterface) {
+        setCurrentCategory(category);
+        setShowDeleteConfirmation(true);
+    }
+
+    async function onDeleteConfirm() {
+        setShowDeleteConfirmation(false);
+        if (!currentCategory) {
+            return;
+        }
+        let {data} = await deleteCategory({
+            variables: {
+                input: currentCategory.id
+            }
+        });
+
+        if (data && data.deleteCategory) {
+            let categoryIndex = internalCategories.findIndex(cat => cat.id === currentCategory.id);
+            let splicedArray = getSplicedArray(internalCategories, categoryIndex);
+            updateCategories(splicedArray);
+        }
+    }
+
+    async function onDeleteCancel() {
+        setShowDeleteConfirmation(false);
+        setCurrentCategory(undefined);
+    }
+
+    function onAddNewCategoryAction() {
+        setCurrentCategory(undefined);
+        setIsEditPopupVisible(true);
     }
 
     return (
         <View>
             <View style={styles.header}>
                 <Text category="h5">Category</Text>
-                <Button size="medium" onPress={() => setVisible(true)}>Add Category</Button>
-                {
-                    visible &&
-                    <CategoryCRUD onSecondaryAction={() => setVisible(false)} onPrimaryAction={onCategoryAdd}/>
-                }
+                <Button size="medium" onPress={onAddNewCategoryAction}>Add Category</Button>
             </View>
             <View style={styles.cardsContainer}>
                 {
                     internalCategories.map(category =>
-                        <View>
-                            <Category {...category} key={category.id} disabled={true}/>
+                        <View key={category.id}>
+                            <Category {...category} disabled={true}/>
                             <View style={{flexDirection: "row", justifyContent: "space-around"}}>
-                                <Button size="small" status="basic" onPress={() => setVisible(true)}>Edit</Button>
-                                <Button size="small" status="basic" onPress={() => setVisible(true)}>Delete</Button>
+                                <Button
+                                    size="small"
+                                    status="basic"
+                                    onPress={() => onEditAction(category)}
+                                >Edit</Button>
+                                <Button
+                                    size="small"
+                                    status="basic"
+                                    onPress={() => onDeleteAction(category)}
+                                >Delete</Button>
                             </View>
                         </View>
                     )
                 }
             </View>
+            {
+                isEditPopupVisible &&
+                <CategoryEdit
+                    onSecondaryAction={onEditCancel}
+                    onPrimaryAction={onCategoryUpdate}
+                    visible={true}
+                    name={currentCategory && currentCategory.name}
+                    orderOfDisplay={currentCategory && currentCategory.orderOfDisplay}
+                    imageUrl={currentCategory && currentCategory.imageUrl}
+                />
+            }
+            <ConfirmationPopup
+                onPrimaryAction={onDeleteConfirm}
+                onSecondaryAction={onDeleteCancel}
+                primaryText="DELETE"
+                secondaryText="CANCEL"
+                title="Are you sure?"
+                primaryActionType="danger"
+                visible={showDeleteConfirmation}
+            />
         </View>
     )
 }

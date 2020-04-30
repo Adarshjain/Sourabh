@@ -10,7 +10,7 @@ export default () =>
             animation="pulse"
             name='alert-triangle'
         />
-        <Text>Some error occurred. Please refresh the page.</Text>
+        <Text style={{marginBottom: 4}}>Some error occurred. Please refresh the page.</Text>
         <Text>If this error is still visible, please contact developer.</Text>
     </View>;
 

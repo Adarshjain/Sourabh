@@ -6,12 +6,14 @@ type Query {
 
 type Mutation {
     updateCategory(input:CategoryInput): Category
+    deleteCategory(id:String!): Boolean
 }
 
 type Category {
     id: String!
     name: String!
     imageUrl: String!
+    orderOfDisplay: Int
 }
 
 type SecondCategory {
@@ -51,6 +53,7 @@ type UnitValueObj {
 }
 
 input CategoryInput {
+    id:String
     name: String!
     imageUrl: String!
     orderOfDisplay: Int

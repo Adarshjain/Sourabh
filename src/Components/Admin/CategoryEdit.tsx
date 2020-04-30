@@ -3,16 +3,18 @@ import {Button, Card, Input, Modal, Text} from "@ui-kitten/components";
 import React, {ChangeEvent} from "react";
 import UploadButton from "../Common/UploadButton";
 import Category from "../Common/Category";
+import {CategoryInput} from "../../types";
 
 interface Props {
-    onPrimaryAction: (obj: { name: string, orderOfDisplay: number, file: string }) => void,
+    onPrimaryAction: (obj: CategoryInput) => void | Promise<void>,
     onSecondaryAction: () => void,
+    visible: boolean
     name?: string,
     orderOfDisplay?: any,
     imageUrl?: string
 }
 
-export default function CategoryCRUD({onPrimaryAction, onSecondaryAction, name, orderOfDisplay, imageUrl}: Props) {
+export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, orderOfDisplay, imageUrl, visible}: Props) {
     const [internalName, setName] = React.useState(name || '');
     const [internalOrderOfDisplay, setOrderOfDisplay] = React.useState(orderOfDisplay || '');
     const [file, setFile] = React.useState<any>(undefined);
@@ -31,12 +33,16 @@ export default function CategoryCRUD({onPrimaryAction, onSecondaryAction, name, 
             setInternalOrderOfDisplayState("danger");
             hasError = true;
         }
-        if (!file) {
+        if (!imageUrl && !file) {
             setFileState("danger");
             hasError = true;
         }
-        if (!hasError && file) {
-            onPrimaryAction({name: internalName, orderOfDisplay: parseInt(internalOrderOfDisplay), file});
+        if (!hasError) {
+            onPrimaryAction({
+                name: internalName,
+                orderOfDisplay: parseInt(internalOrderOfDisplay),
+                imageUrl: imageUrl || file
+            });
         }
     }
 
@@ -53,7 +59,7 @@ export default function CategoryCRUD({onPrimaryAction, onSecondaryAction, name, 
     }
 
     return (
-        <Modal visible={true} backdropStyle={styles.backdrop}>
+        <Modal visible={visible} backdropStyle={styles.backdrop}>
             <Card
                 style={styles.cardContainer}
                 disabled={true}
