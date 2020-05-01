@@ -41,7 +41,7 @@ export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, 
             onPrimaryAction({
                 name: internalName,
                 orderOfDisplay: parseInt(internalOrderOfDisplay),
-                imageUrl: imageUrl || file
+                imageUrl: imageUrl || file.type
             });
         }
     }
