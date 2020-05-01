@@ -1,9 +1,9 @@
 import {StyleSheet, View} from "react-native";
 import {Button, Card, Input, Modal, Text} from "@ui-kitten/components";
 import React, {ChangeEvent} from "react";
-import UploadButton from "../Common/UploadButton";
-import Category from "../Common/Category";
-import {CategoryInput} from "../../types";
+import UploadButton from "../../Common/UploadButton";
+import Category from "../../Common/Category";
+import {CategoryInput} from "../../../types";
 
 interface Props {
     onPrimaryAction: (obj: CategoryInput) => void | Promise<void>,

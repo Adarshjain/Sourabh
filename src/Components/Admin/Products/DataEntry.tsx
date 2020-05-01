@@ -1,6 +1,6 @@
 import {Layout} from "@ui-kitten/components";
 import React from "react";
-import DataGrid from "./Spreadsheet";
+import DataGrid from "../Spreadsheet";
 
 const DataEntry = () => {
     return (

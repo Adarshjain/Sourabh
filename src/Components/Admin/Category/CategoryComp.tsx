@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import {StyleSheet, View} from "react-native";
 import {useMutation} from "@apollo/react-hooks";
-import {Category as CategoryInterface, CategoryInput, GQLInput} from "../../types";
-import Category from "../Common/Category";
-import {DELETE_CATEGORY, FETCH_CATEGORIES, UPDATE_CATEGORY} from "../../Network/schemaFormats";
+import {Category as CategoryInterface, CategoryInput, GQLInput} from "../../../types";
+import Category from "../../Common/Category";
+import {DELETE_CATEGORY, FETCH_CATEGORIES, UPDATE_CATEGORY} from "../../../Network/schemaFormats";
 import CategoryEdit from "./CategoryEdit";
 import {Button, Text} from "@ui-kitten/components";
-import GqlQueryWrapper from "../Common/GqlQueryWrapper";
-import {getSplicedArray, pushToArray, replaceArrayAt} from "../../Helpers";
-import ConfirmationPopup from "./ConfirmationPopup";
+import GqlQueryWrapper from "../../Common/GqlQueryWrapper";
+import {getSplicedArray, pushToArray, replaceArrayAt} from "../../../Helpers";
+import ConfirmationPopup from "../../Common/ConfirmationPopup";
 
 interface CategoryResponse {
     data: { categories: CategoryInterface[] }

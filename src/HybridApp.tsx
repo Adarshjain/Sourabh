@@ -3,7 +3,7 @@ import ReactDom from "react-dom";
 import {Link, Route, Router, Switch} from "./Routers/routing";
 import {ApplicationProvider, IconRegistry} from "@ui-kitten/components";
 import {light as theme, mapping} from "@eva-design/eva";
-import Admin from "./Components/Admin";
+import Admin from "./Components/Admin/Admin";
 import {EvaIconsPack} from "@ui-kitten/eva-icons";
 import client from "./Network/Apollo/client";
 import {ApolloProvider} from '@apollo/react-hooks';

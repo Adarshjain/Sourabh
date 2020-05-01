@@ -1,8 +1,8 @@
 import {Layout} from "@ui-kitten/components";
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import {Nav} from "./Admin/Nav";
-import {AdminArea} from "./Admin/AdminArea";
+import {Nav} from "./Nav";
+import {AdminArea} from "./AdminArea";
 
 const Admin = (props) => {
     return (

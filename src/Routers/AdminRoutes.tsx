@@ -1,6 +1,6 @@
-import CategoryComp from "../Components/Admin/CategoryComp";
-import SubCategory from "../Components/Admin/SubCategory";
-import DataEntry from "../Components/Admin/DataEntry";
+import CategoryComp from "../Components/Admin/Category/CategoryComp";
+import SubCategory from "../Components/Admin/SubCategory/SubCategory";
+import DataEntry from "../Components/Admin/Products/DataEntry";
 import {Route} from "./routing";
 import React from "react";
 

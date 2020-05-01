@@ -1,7 +1,7 @@
 import React from "react";
 import {useQuery} from "@apollo/react-hooks";
-import AdminLoading from "../Admin/AdminLoading";
-import AdminError from "../Admin/AdminError";
+import AdminLoading from "./Loading";
+import AdminError from "./Error";
 import {DocumentNode} from "graphql";
 
 export default function GqlQueryWrapper(Component, gqlQuery: DocumentNode, ...props) {
