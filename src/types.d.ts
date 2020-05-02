@@ -30,6 +30,8 @@ export type Mutation = {
    __typename?: 'Mutation';
   updateCategory?: Maybe<Category>;
   deleteCategory?: Maybe<Scalars['Boolean']>;
+  updateSecondCategory?: Maybe<Category>;
+  deleteSecondCategory?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -39,6 +41,16 @@ export type MutationUpdateCategoryArgs = {
 
 
 export type MutationDeleteCategoryArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationUpdateSecondCategoryArgs = {
+  input?: Maybe<SecondCategoryInput>;
+};
+
+
+export type MutationDeleteSecondCategoryArgs = {
   id: Scalars['String'];
 };
 
@@ -56,6 +68,7 @@ export type SecondCategory = {
   name: Scalars['String'];
   imageUrl: Scalars['String'];
   category: Category;
+  orderOfDisplay?: Maybe<Scalars['Int']>;
 };
 
 export type ThirdCategory = {
@@ -94,6 +107,14 @@ export type CategoryInput = {
   id?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   imageUrl: Scalars['String'];
-  orderOfDisplay?: Maybe<Scalars['Int']>;
+  orderOfDisplay: Scalars['Int'];
+};
+
+export type SecondCategoryInput = {
+  id?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  imageUrl: Scalars['String'];
+  orderOfDisplay: Scalars['Int'];
+  categoryId: Scalars['String'];
 };
 

@@ -9,10 +9,7 @@ import {Button, Text} from "@ui-kitten/components";
 import GqlQueryWrapper from "../../Common/GqlQueryWrapper";
 import {getSplicedArray, pushToArray, replaceArrayAt} from "../../../libs/Helpers";
 import ConfirmationPopup from "../../Common/ConfirmationPopup";
-
-interface CategoryResponse {
-    data: { categories: CategoryInterface[] }
-}
+import {CategoryResponse} from "../../../customTypes";
 
 export default GqlQueryWrapper(CategoryComp, FETCH_CATEGORIES);
 

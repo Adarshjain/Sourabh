@@ -1,7 +1,7 @@
 type Category{
-  id: String @fake(type:uuid)
-  name: String @fake(type: productName)
-  imageUrl: String 
+  id: String! @fake(type:uuid)
+  name: String! @fake(type: productName)
+  imageUrl: String!
   # @examples(values:[
   # "https://random.dog/00186969-c51d-462b-948b-30a7e1735908.jpg",
   # "https://random.dog/00564ba3-e5cb-4b2b-8d97-c65a9ef26c23.png",
@@ -16,18 +16,39 @@ type Category{
   orderOfDisplay: Int @fake(type: number)
 }
 
+type SecondCategory {
+    id: String! @fake(type:uuid)
+    name: String! @fake(type: productName)
+    imageUrl: String!
+    category: Category!
+    orderOfDisplay: Int @fake(type: number)
+}
+
+
 type Query{
   categories :[Category] @listLength(min:4,max: 12)
+  secondCategories(category: String): [SecondCategory]!
 }
 
 type Mutation {
     updateCategory(input:CategoryInput): Category
   	deleteCategory(id:String!): Boolean @examples(values:[true])
+    updateSecondCategory(input:SecondCategoryInput): Category
+    deleteSecondCategory(id:String!): Boolean
+
 }
 
 input CategoryInput {
-  	id:String
+    id:String
     name: String!
     imageUrl: String!
-    orderOfDisplay: Int
+    orderOfDisplay: Int!
+}
+
+input SecondCategoryInput {
+    id:String
+    name: String!
+    imageUrl: String!
+    orderOfDisplay: Int!
+    categoryId:String!
 }
