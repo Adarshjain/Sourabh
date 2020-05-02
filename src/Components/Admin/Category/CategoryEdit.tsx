@@ -1,6 +1,6 @@
 import {StyleSheet, View} from "react-native";
 import {Button, Card, Input, Modal, Text} from "@ui-kitten/components";
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useEffect} from "react";
 import UploadButton from "../../Common/UploadButton";
 import Category from "../../Common/Category";
 import {CategoryInput} from "../../../types";
@@ -17,14 +17,31 @@ interface Props {
 }
 
 export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, orderOfDisplay, imageUrl, visible}: Props) {
+    //Data states
     const [internalName, setName] = React.useState(name || '');
     const [internalOrderOfDisplay, setOrderOfDisplay] = React.useState(orderOfDisplay || '');
     const [file, setFile] = React.useState<any>(undefined);
+
+    //Input states
     const [internalNameState, setInternalNameState] = React.useState("basic");
     const [internalOrderOfDisplayState, setInternalOrderOfDisplayState] = React.useState("basic");
     const [fileState, setFileState] = React.useState("basic");
+
+    //Others
     const [imageData, setImageData] = React.useState<any>(undefined);
     const [isLoading, setIsLoading] = React.useState(false);
+
+    useEffect(() => {
+        if (internalName !== "") {
+            setInternalNameState("basic");
+        }
+        if (internalOrderOfDisplay !== "") {
+            setInternalOrderOfDisplayState("basic");
+        }
+        if (!!file) {
+            setFileState("basic");
+        }
+    }, [internalName, internalOrderOfDisplay, file]);
 
     async function onUpdate() {
         let hasError = false;

@@ -1,6 +1,6 @@
 import {StyleSheet, View} from "react-native";
 import {Card, IndexPath, Input, Modal, Select, SelectItem, Text} from "@ui-kitten/components";
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useEffect} from "react";
 import UploadButton from "../../Common/UploadButton";
 import Category from "../../Common/Category";
 import {SecondCategoryInput} from "../../../types";
@@ -42,6 +42,21 @@ function SecondCategoryEdit(
     //Others
     const [imageData, setImageData] = React.useState<any>(undefined);
     const [isLoading, setIsLoading] = React.useState(false);
+
+    useEffect(() => {
+        if (internalName !== "") {
+            setInternalNameState("basic");
+        }
+        if (internalOrderOfDisplay !== "") {
+            setInternalOrderOfDisplayState("basic");
+        }
+        if (!!file) {
+            setFileState("basic");
+        }
+        if (!!selectedCategory) {
+            setSelectedCategoryState("basic");
+        }
+    }, [internalName, internalOrderOfDisplay, file, selectedCategory])
 
     async function onUpdate() {
         let hasError = false;
