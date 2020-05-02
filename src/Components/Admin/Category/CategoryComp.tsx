@@ -7,7 +7,7 @@ import {DELETE_CATEGORY, FETCH_CATEGORIES, UPDATE_CATEGORY} from "../../../Netwo
 import CategoryEdit from "./CategoryEdit";
 import {Button, Text} from "@ui-kitten/components";
 import GqlQueryWrapper from "../../Common/GqlQueryWrapper";
-import {getSplicedArray, pushToArray, replaceArrayAt} from "../../../Helpers";
+import {getSplicedArray, pushToArray, replaceArrayAt} from "../../../libs/Helpers";
 import ConfirmationPopup from "../../Common/ConfirmationPopup";
 
 interface CategoryResponse {
@@ -27,6 +27,12 @@ function CategoryComp({data: {categories}}: CategoryResponse) {
     async function onCategoryUpdate(tempCategory: CategoryInput) {
         setIsEditPopupVisible(false);
         if (!!currentCategory) {
+            if (tempCategory.name === currentCategory.name
+                && tempCategory.orderOfDisplay === currentCategory.orderOfDisplay
+                && tempCategory.imageUrl === currentCategory.imageUrl) {
+                setCurrentCategory(undefined);
+                return;
+            }
             tempCategory.id = currentCategory.id;
         }
         let category = await updateCategory({

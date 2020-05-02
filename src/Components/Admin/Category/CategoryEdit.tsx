@@ -4,6 +4,8 @@ import React, {ChangeEvent} from "react";
 import UploadButton from "../../Common/UploadButton";
 import Category from "../../Common/Category";
 import {CategoryInput} from "../../../types";
+import {uploadImage} from "../../../libs/FileUpload";
+import Loading from "../../Common/Loading";
 
 interface Props {
     onPrimaryAction: (obj: CategoryInput) => void | Promise<void>,
@@ -22,8 +24,9 @@ export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, 
     const [internalOrderOfDisplayState, setInternalOrderOfDisplayState] = React.useState("basic");
     const [fileState, setFileState] = React.useState("basic");
     const [imageData, setImageData] = React.useState<any>(undefined);
+    const [isLoading, setIsLoading] = React.useState(false);
 
-    function onUpdate() {
+    async function onUpdate() {
         let hasError = false;
         if (internalName === "") {
             setInternalNameState("danger");
@@ -37,11 +40,18 @@ export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, 
             setFileState("danger");
             hasError = true;
         }
+
+        let uploadedImageURL: string = "";
+        if (file) {
+            setIsLoading(true);
+            uploadedImageURL = await uploadImage(file);
+            setIsLoading(false);
+        }
         if (!hasError) {
             onPrimaryAction({
                 name: internalName,
                 orderOfDisplay: parseInt(internalOrderOfDisplay),
-                imageUrl: imageUrl || file.type
+                imageUrl: uploadedImageURL || imageUrl || ""
             });
         }
     }
@@ -60,41 +70,47 @@ export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, 
 
     return (
         <Modal visible={visible} backdropStyle={styles.backdrop}>
-            <Card
-                style={styles.cardContainer}
-                disabled={true}
-                header={(props) => <Text {...props}>Category</Text>}
-                footer={(props) =>
-                    <Footer {...props} onSecondaryAction={onSecondaryAction} onPrimaryAction={onUpdate}/>
-                }
-            >
-                <View style={{flexDirection: "row"}}>
-                    <View style={{flex: 1}}>
-                        <Input
-                            style={styles.input}
-                            value={internalName}
-                            label='Name'
-                            status={internalNameState}
-                            onChangeText={name => setName(name)}
-                        />
-                        <Input
-                            style={styles.input}
-                            value={internalOrderOfDisplay}
-                            label='Order of display'
-                            status={internalOrderOfDisplayState}
-                            onChangeText={nextValue => setOrderOfDisplay(nextValue)}
-                            keyboardType="numeric"
-                        />
-                        <UploadButton status={fileState} onChange={onFileSelected}>Pick Image</UploadButton>
-                    </View>
-                    {
-                        (imageData || imageUrl) &&
-                        <View style={{flex: 1}}>
-                            <Category name={internalName} disabled={false} imageUrl={imageData || imageUrl}/>
+            {
+                !isLoading ?
+                    <Card
+                        style={styles.cardContainer}
+                        disabled={true}
+                        header={(props) => <Text {...props}>Category</Text>}
+                        footer={(props) =>
+                            <Footer {...props} onSecondaryAction={onSecondaryAction} onPrimaryAction={onUpdate}/>
+                        }
+                    >
+                        <View style={{flexDirection: "row"}}>
+                            <View style={{flex: 1}}>
+                                <Input
+                                    style={styles.input}
+                                    value={internalName}
+                                    label='Name'
+                                    status={internalNameState}
+                                    onChangeText={name => setName(name)}
+                                />
+                                <Input
+                                    style={styles.input}
+                                    value={internalOrderOfDisplay}
+                                    label='Order of display'
+                                    status={internalOrderOfDisplayState}
+                                    onChangeText={nextValue => setOrderOfDisplay(nextValue)}
+                                    keyboardType="numeric"
+                                />
+                                <UploadButton status={fileState} onChange={onFileSelected}>Pick Image</UploadButton>
+                            </View>
+                            {
+                                (imageData || imageUrl) &&
+                                <View style={{flex: 1}}>
+                                    <Category name={internalName} disabled={false} imageUrl={imageData || imageUrl}/>
+                                </View>
+                            }
                         </View>
-                    }
-                </View>
-            </Card>
+
+                    </Card>
+                    : <Loading/>
+            }
+
         </Modal>
     )
 }
