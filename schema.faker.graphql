@@ -1,4 +1,27 @@
-type Category{
+type Query {
+    categoriesOne(categoryOneId: String): [CategoryOne]! @listLength(min:4,max: 12)
+    categoriesTwo(categoryTwoId: String): [CategoryTwo]! @listLength(min:4,max: 12)
+}
+
+type Mutation {
+    updateCategoryOne(
+        id:String
+        name: String!
+        imageUrl: String!
+        orderOfDisplay: Int!
+    ): CategoryOne
+    deleteCategoryOne(categoryOneId: String!): Boolean
+    updateCategoryTwo(
+        id:String
+        name: String!
+        imageUrl: String!
+        orderOfDisplay: Int!
+        categoryOneId: String!
+    ): CategoryTwo
+    deleteCategoryTwo(categoryTwoId: String!): Boolean
+}
+
+type CategoryOne {
   id: String! @fake(type:uuid)
   name: String! @fake(type: productName)
   imageUrl: String!
@@ -16,39 +39,31 @@ type Category{
   orderOfDisplay: Int @fake(type: number)
 }
 
-type SecondCategory {
+type CategoryTwo {
     id: String! @fake(type:uuid)
     name: String! @fake(type: productName)
     imageUrl: String!
-    category: Category!
+    categoryOne: CategoryOne!
     orderOfDisplay: Int @fake(type: number)
 }
 
-
-type Query{
-  categories :[Category] @listLength(min:4,max: 12)
-  secondCategories(category: String): [SecondCategory]!
+type Product {
+    name: String
+    categoryOne: CategoryOne!
+    categoryTwo: CategoryTwo!
+    price: Int
+    favorite: Boolean
+    images: [String]
+    weight: UnitValueObj
+    purity: UnitValueObj
+    gender: String
+    size: String
+    isOnDiscount: Boolean
+    isHallmark: Boolean
+    isHidden: Boolean
 }
 
-type Mutation {
-    updateCategory(input:CategoryInput): Category
-  	deleteCategory(id:String!): Boolean @examples(values:[true])
-    updateSecondCategory(input:SecondCategoryInput): SecondCategory
-    deleteSecondCategory(id:String!): Boolean @examples(values:[true])
-
-}
-
-input CategoryInput {
-    id:String
-    name: String!
-    imageUrl: String!
-    orderOfDisplay: Int!
-}
-
-input SecondCategoryInput {
-    id:String
-    name: String!
-    imageUrl: String!
-    orderOfDisplay: Int!
-    categoryId:String!
+type UnitValueObj {
+    unit: String
+    value: Int
 }

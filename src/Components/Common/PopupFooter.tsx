@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     footerControl: {
-        marginHorizontal: 2
+        marginLeft:2,
+        marginRight:2
     }
 });

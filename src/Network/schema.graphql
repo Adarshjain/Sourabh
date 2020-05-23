@@ -1,50 +1,52 @@
 type Query {
-    categories: [Category]!
-    secondCategories(category: String): [SecondCategory]!
-    thirdCategories(secondCategory: String): [ThirdCategory]!
+    categoriesOne(categoryOneId: String): [CategoryOne]!
+    categoriesTwo(categoryTwoId: String): [CategoryTwo]!
 }
 
 type Mutation {
-    updateCategory(input:CategoryInput): Category
-    deleteCategory(id:String!): Boolean
-    updateSecondCategory(input:SecondCategoryInput): Category
-    deleteSecondCategory(id:String!): Boolean
+    updateCategoryOne(
+        id:String
+        name: String!
+        imageUrl: String!
+        orderOfDisplay: Int!
+    ): CategoryOne
+    deleteCategoryOne(categoryOneId: String!): Boolean
+    updateCategoryTwo(
+        id:String
+        name: String!
+        imageUrl: String!
+        orderOfDisplay: Int!
+        categoryOneId: String!
+    ): CategoryTwo
+    deleteCategoryTwo(categoryTwoId: String!): Boolean
 }
 
-type Category {
+type CategoryOne {
     id: String!
     name: String!
     imageUrl: String!
     orderOfDisplay: Int
 }
 
-type SecondCategory {
+type CategoryTwo {
     id: String!
     name: String!
     imageUrl: String!
-    category: Category!
+    categoryOne: CategoryOne!
     orderOfDisplay: Int
-}
-
-type ThirdCategory {
-    id: String!
-    name: String!
-    imageUrl: String!
-    secondCategory: SecondCategory!
 }
 
 type Product {
-    Name: String
-    Category: Category!
-    secondCategory: SecondCategory!
-    thirdCategory: ThirdCategory
-    Price: Int
+    name: String
+    categoryOne: CategoryOne!
+    categoryTwo: CategoryTwo!
+    price: Int
     favorite: Boolean
     images: [String]
-    Weight: UnitValueObj
-    Purity: UnitValueObj
-    Gender: String
-    Size: String
+    weight: UnitValueObj
+    purity: UnitValueObj
+    gender: String
+    size: String
     isOnDiscount: Boolean
     isHallmark: Boolean
     isHidden: Boolean
@@ -53,19 +55,4 @@ type Product {
 type UnitValueObj {
     unit: String
     value: Int
-}
-
-input CategoryInput {
-    id:String
-    name: String!
-    imageUrl: String!
-    orderOfDisplay: Int!
-}
-
-input SecondCategoryInput {
-    id:String
-    name: String!
-    imageUrl: String!
-    orderOfDisplay: Int!
-    categoryId:String!
 }

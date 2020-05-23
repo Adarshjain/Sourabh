@@ -2,7 +2,7 @@ import {gql} from "apollo-boost";
 
 export const FETCH_CATEGORIES = gql`
     {
-        categories {
+        categoriesOne {
             id
             name
             imageUrl
@@ -12,8 +12,18 @@ export const FETCH_CATEGORIES = gql`
 `;
 
 export const UPDATE_CATEGORY = gql`
-    mutation updateCategory($input: CategoryInput){
-        updateCategory(input: $input) {
+    mutation updateCategory(
+        $id:String
+        $name: String!
+        $imageUrl: String!
+        $orderOfDisplay: Int!
+    ){
+        updateCategoryOne(
+            id: $id
+            name: $name
+            imageUrl: $imageUrl
+            orderOfDisplay: $orderOfDisplay
+        ) {
             id
             imageUrl
             name
@@ -24,18 +34,18 @@ export const UPDATE_CATEGORY = gql`
 
 export const DELETE_CATEGORY = gql`
     mutation deleteCategory($input: String!){
-        deleteCategory(id: $input)
+        deleteCategoryOne(categoryOneId: $input)
     }
 `;
 
 export const FETCH_SECOND_CATEGORIES = gql`
     {
-        secondCategories {
+        categoriesTwo {
             id
             name
             imageUrl
             orderOfDisplay
-            category {
+            categoryOne {
                 id
                 name
             }
@@ -44,8 +54,20 @@ export const FETCH_SECOND_CATEGORIES = gql`
 `;
 
 export const UPDATE_SECOND_CATEGORY = gql`
-    mutation updateSecondCategory($input: SecondCategoryInput){
-        updateSecondCategory(input: $input) {
+    mutation updateSecondCategory(
+        $id:String
+        $name: String!
+        $imageUrl: String!
+        $orderOfDisplay: Int!
+        $categoryOneId: String!
+    ){
+        updateCategoryTwo(
+            id: $id
+            name: $name
+            imageUrl: $imageUrl
+            orderOfDisplay: $orderOfDisplay
+            categoryOneId: $categoryOneId
+        ) {
             id
             imageUrl
             name
@@ -56,6 +78,6 @@ export const UPDATE_SECOND_CATEGORY = gql`
 
 export const DELETE_SECOND_CATEGORY = gql`
     mutation deleteSecondCategory($input: String!){
-        deleteSecondCategory(id: $input)
+        deleteCategoryTwo(categoryTwoId: $input)
     }
 `;

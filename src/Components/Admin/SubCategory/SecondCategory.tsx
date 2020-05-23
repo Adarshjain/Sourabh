@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {StyleSheet, View} from "react-native";
 import {useMutation} from "@apollo/react-hooks";
-import {GQLInput, SecondCategory, SecondCategoryInput} from "../../../types";
+import {CategoryTwo, MutationUpdateCategoryTwoArgs} from "../../../types";
 import Category from "../../Common/Category";
 import {DELETE_SECOND_CATEGORY, FETCH_SECOND_CATEGORIES, UPDATE_SECOND_CATEGORY} from "../../../Network/schemaFormats";
 import SecondCategoryEdit from "./SecondCategoryEdit";
@@ -11,25 +11,25 @@ import {getSplicedArray, pushToArray, replaceArrayAt} from "../../../libs/Helper
 import ConfirmationPopup from "../../Common/ConfirmationPopup";
 
 interface CategoryResponse {
-    data: { secondCategories: SecondCategory[] }
+    data: { categoriesTwo: CategoryTwo[] }
 }
 
 export default GqlQueryWrapper(SecondCategoryComp, FETCH_SECOND_CATEGORIES);
 
-function SecondCategoryComp({data: {secondCategories}}: CategoryResponse) {
+function SecondCategoryComp({data: {categoriesTwo}}: CategoryResponse) {
     const [isEditPopupVisible, setIsEditPopupVisible] = React.useState(false);
-    const [internalCategories, updateCategories] = useState<SecondCategory[]>(secondCategories || []);
-    const [currentCategory, setCurrentCategory] = useState<SecondCategory | undefined>(undefined);
+    const [internalCategories, updateCategories] = useState<CategoryTwo[]>(categoriesTwo || []);
+    const [currentCategory, setCurrentCategory] = useState<CategoryTwo | undefined>(undefined);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-    const [updateCategory] = useMutation<{ updateSecondCategory: SecondCategory }, GQLInput<SecondCategoryInput>>(UPDATE_SECOND_CATEGORY);
-    const [deleteCategory] = useMutation<{ deleteSecondCategory: boolean }, GQLInput<string>>(DELETE_SECOND_CATEGORY);
+    const [updateCategory] = useMutation<{ updateSecondCategory: CategoryTwo }, MutationUpdateCategoryTwoArgs>(UPDATE_SECOND_CATEGORY);
+    const [deleteCategory] = useMutation<{ deleteSecondCategory: boolean }, string>(DELETE_SECOND_CATEGORY);
 
-    async function onCategoryUpdate(tempCategory: SecondCategoryInput) {
+    async function onCategoryUpdate(tempCategory: MutationUpdateCategoryTwoArgs) {
         setIsEditPopupVisible(false);
         if (!!currentCategory) {
             if (tempCategory.name === currentCategory.name
                 && tempCategory.orderOfDisplay === currentCategory.orderOfDisplay
-                && tempCategory.categoryId === currentCategory.category.id
+                && tempCategory.categoryOneId === currentCategory.categoryOne.id
                 && tempCategory.imageUrl === currentCategory.imageUrl) {
                 setCurrentCategory(undefined);
                 return;
@@ -37,7 +37,7 @@ function SecondCategoryComp({data: {secondCategories}}: CategoryResponse) {
             tempCategory.id = currentCategory.id;
         }
         let category = await updateCategory({
-            variables: {input: tempCategory}
+            variables: tempCategory
         });
         if (category.data !== undefined && category.data.updateSecondCategory !== undefined) {
             if (!!currentCategory) {
@@ -50,7 +50,7 @@ function SecondCategoryComp({data: {secondCategories}}: CategoryResponse) {
         setCurrentCategory(undefined);
     }
 
-    function onEditAction(category: SecondCategory) {
+    function onEditAction(category: CategoryTwo) {
         setCurrentCategory(category);
         setIsEditPopupVisible(true);
     }
@@ -60,7 +60,7 @@ function SecondCategoryComp({data: {secondCategories}}: CategoryResponse) {
         setIsEditPopupVisible(false);
     }
 
-    async function onDeleteAction(category: SecondCategory) {
+    async function onDeleteAction(category: CategoryTwo) {
         setCurrentCategory(category);
         setShowDeleteConfirmation(true);
     }
@@ -71,9 +71,7 @@ function SecondCategoryComp({data: {secondCategories}}: CategoryResponse) {
             return;
         }
         let {data} = await deleteCategory({
-            variables: {
-                input: currentCategory.id
-            }
+            variables: currentCategory.id
         });
 
         if (data && data.deleteSecondCategory) {
@@ -129,7 +127,7 @@ function SecondCategoryComp({data: {secondCategories}}: CategoryResponse) {
                     name={currentCategory && currentCategory.name}
                     orderOfDisplay={currentCategory && currentCategory.orderOfDisplay}
                     imageUrl={currentCategory && currentCategory.imageUrl}
-                    categoryId={currentCategory?.category.id}
+                    categoryId={currentCategory?.categoryOne.id}
                 />
             }
             <ConfirmationPopup

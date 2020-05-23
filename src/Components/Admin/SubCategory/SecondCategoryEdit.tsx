@@ -3,16 +3,16 @@ import {Card, IndexPath, Input, Modal, Select, SelectItem, Text} from "@ui-kitte
 import React, {ChangeEvent, useEffect} from "react";
 import UploadButton from "../../Common/UploadButton";
 import Category from "../../Common/Category";
-import {SecondCategoryInput} from "../../../types";
+import {MutationUpdateCategoryTwoArgs} from "../../../types";
 import {uploadImage} from "../../../libs/FileUpload";
 import Loading from "../../Common/Loading";
 import GqlQueryWrapper from "../../Common/GqlQueryWrapper";
 import {FETCH_CATEGORIES} from "../../../Network/schemaFormats";
-import {CategoryResponse} from "../../../customTypes";
+import {CategoryOneResponse} from "../../../customTypes";
 import Footer from "../../Common/PopupFooter";
 
 interface Props {
-    onPrimaryAction: (obj: SecondCategoryInput) => void | Promise<void>,
+    onPrimaryAction: (obj: MutationUpdateCategoryTwoArgs) => void | Promise<void>,
     onSecondaryAction: () => void,
     visible: boolean
     name?: string,
@@ -24,8 +24,8 @@ interface Props {
 export default GqlQueryWrapper(SecondCategoryEdit, FETCH_CATEGORIES);
 
 function SecondCategoryEdit(
-    {onPrimaryAction, onSecondaryAction, name, orderOfDisplay, imageUrl, visible, categoryId, data: {categories}}
-        : Props & CategoryResponse
+    {onPrimaryAction, onSecondaryAction, name, orderOfDisplay, imageUrl, visible, categoryId, data: {categoriesOne}}
+        : Props & CategoryOneResponse
 ) {
     //Data states
     const [internalName, setName] = React.useState(name || '');
@@ -47,16 +47,22 @@ function SecondCategoryEdit(
         if (internalName !== "") {
             setInternalNameState("basic");
         }
+    }, [internalName]);
+    useEffect(() => {
         if (internalOrderOfDisplay !== "") {
             setInternalOrderOfDisplayState("basic");
         }
+    }, [internalOrderOfDisplay]);
+    useEffect(() => {
         if (!!file) {
             setFileState("basic");
         }
+    }, [file]);
+    useEffect(() => {
         if (!!selectedCategory) {
             setSelectedCategoryState("basic");
         }
-    }, [internalName, internalOrderOfDisplay, file, selectedCategory])
+    }, [selectedCategory])
 
     async function onUpdate() {
         let hasError = false;
@@ -88,7 +94,7 @@ function SecondCategoryEdit(
                 name: internalName,
                 orderOfDisplay: parseInt(internalOrderOfDisplay),
                 imageUrl: uploadedImageURL || imageUrl || "",
-                categoryId: selectedCategory || ""
+                categoryOneId: selectedCategory || ""
             });
         }
     }
@@ -144,15 +150,15 @@ function SecondCategoryEdit(
                                     style={styles.input}
                                     status={selectedCategoryState}
                                     label='Category'
-                                    value={categories.find(cat => cat.id === selectedCategory)?.name}
+                                    value={categoriesOne.find(cat => cat.id === selectedCategory)?.name}
                                     onSelect={(selected) => {
                                         if (selected instanceof IndexPath) {
-                                            setSelectedCategory(categories[selected.row].id)
+                                            setSelectedCategory(categoriesOne[selected.row].id)
                                         }
                                     }}
                                 >
                                     {
-                                        categories.map(category =>
+                                        categoriesOne.map(category =>
                                             <SelectItem
                                                 selected={category.id === selectedCategory}
                                                 title={category.name}
@@ -193,7 +199,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     footerControl: {
-        marginHorizontal: 2
+        marginLeft:2,
+        marginRight:2
     },
     input: {
         marginBottom: 12

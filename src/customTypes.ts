@@ -1,5 +1,8 @@
-import {Category} from "./types";
+import {CategoryOne, CategoryTwo} from "./types";
 
-export interface CategoryResponse {
-    data: { categories: Category[] }
+export interface CategoryOneResponse {
+    data: { categoriesOne: CategoryOne[] }
+}
+export interface CategoryOneResponse {
+    data: { categoriesOne: CategoryTwo[] }
 }

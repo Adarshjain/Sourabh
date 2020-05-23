@@ -3,12 +3,12 @@ import {Button, Card, Input, Modal, Text} from "@ui-kitten/components";
 import React, {ChangeEvent, useEffect} from "react";
 import UploadButton from "../../Common/UploadButton";
 import Category from "../../Common/Category";
-import {CategoryInput} from "../../../types";
+import {MutationUpdateCategoryOneArgs} from "../../../types";
 import {uploadImage} from "../../../libs/FileUpload";
 import Loading from "../../Common/Loading";
 
 interface Props {
-    onPrimaryAction: (obj: CategoryInput) => void | Promise<void>,
+    onPrimaryAction: (obj: MutationUpdateCategoryOneArgs) => void | Promise<void>,
     onSecondaryAction: () => void,
     visible: boolean
     name?: string,
@@ -166,7 +166,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     footerControl: {
-        marginHorizontal: 2
+        marginLeft:2,
+        marginRight:2
     },
     input: {
         marginBottom: 12

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {StyleSheet, View} from "react-native";
 import {useMutation} from "@apollo/react-hooks";
-import {Category as CategoryInterface, CategoryInput, GQLInput} from "../../../types";
+import {CategoryOne, MutationUpdateCategoryOneArgs} from "../../../types";
 import Category from "../../Common/Category";
 import {DELETE_CATEGORY, FETCH_CATEGORIES, UPDATE_CATEGORY} from "../../../Network/schemaFormats";
 import CategoryEdit from "./CategoryEdit";
@@ -9,19 +9,19 @@ import {Button, Text} from "@ui-kitten/components";
 import GqlQueryWrapper from "../../Common/GqlQueryWrapper";
 import {getSplicedArray, pushToArray, replaceArrayAt} from "../../../libs/Helpers";
 import ConfirmationPopup from "../../Common/ConfirmationPopup";
-import {CategoryResponse} from "../../../customTypes";
+import {CategoryOneResponse} from "../../../customTypes";
 
 export default GqlQueryWrapper(CategoryComp, FETCH_CATEGORIES);
 
-function CategoryComp({data: {categories}}: CategoryResponse) {
+function CategoryComp({data: {categoriesOne}}: CategoryOneResponse) {
     const [isEditPopupVisible, setIsEditPopupVisible] = React.useState(false);
-    const [internalCategories, updateCategories] = useState<CategoryInterface[]>(categories || []);
-    const [currentCategory, setCurrentCategory] = useState<CategoryInterface | undefined>(undefined);
+    const [internalCategories, updateCategories] = useState<CategoryOne[]>(categoriesOne || []);
+    const [currentCategory, setCurrentCategory] = useState<CategoryOne | undefined>(undefined);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-    const [updateCategory] = useMutation<{ updateCategory: CategoryInterface }, GQLInput<CategoryInput>>(UPDATE_CATEGORY);
-    const [deleteCategory] = useMutation<{ deleteCategory: boolean }, GQLInput<string>>(DELETE_CATEGORY);
+    const [updateCategory] = useMutation<{ updateCategory: CategoryOne }, MutationUpdateCategoryOneArgs>(UPDATE_CATEGORY);
+    const [deleteCategory] = useMutation<{ deleteCategory: boolean }, string>(DELETE_CATEGORY);
 
-    async function onCategoryUpdate(tempCategory: CategoryInput) {
+    async function onCategoryUpdate(tempCategory: MutationUpdateCategoryOneArgs) {
         setIsEditPopupVisible(false);
         if (!!currentCategory) {
             if (tempCategory.name === currentCategory.name
@@ -33,7 +33,7 @@ function CategoryComp({data: {categories}}: CategoryResponse) {
             tempCategory.id = currentCategory.id;
         }
         let category = await updateCategory({
-            variables: {input: tempCategory}
+            variables: tempCategory
         });
         if (category.data !== undefined && category.data.updateCategory !== undefined) {
             if (!!currentCategory) {
@@ -46,7 +46,7 @@ function CategoryComp({data: {categories}}: CategoryResponse) {
         setCurrentCategory(undefined);
     }
 
-    function onEditAction(category: CategoryInterface) {
+    function onEditAction(category: CategoryOne) {
         setCurrentCategory(category);
         setIsEditPopupVisible(true);
     }
@@ -56,7 +56,7 @@ function CategoryComp({data: {categories}}: CategoryResponse) {
         setIsEditPopupVisible(false);
     }
 
-    async function onDeleteAction(category: CategoryInterface) {
+    async function onDeleteAction(category: CategoryOne) {
         setCurrentCategory(category);
         setShowDeleteConfirmation(true);
     }
@@ -67,9 +67,7 @@ function CategoryComp({data: {categories}}: CategoryResponse) {
             return;
         }
         let {data} = await deleteCategory({
-            variables: {
-                input: currentCategory.id
-            }
+            variables: currentCategory.id
         });
 
         if (data && data.deleteCategory) {
