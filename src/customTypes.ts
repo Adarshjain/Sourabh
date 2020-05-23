@@ -3,6 +3,6 @@ import {CategoryOne, CategoryTwo} from "./types";
 export interface CategoryOneResponse {
     data: { categoriesOne: CategoryOne[] }
 }
-export interface CategoryOneResponse {
-    data: { categoriesOne: CategoryTwo[] }
+export interface CategoryTwoResponse {
+    data: { categoriesTwo: CategoryTwo[] }
 }
