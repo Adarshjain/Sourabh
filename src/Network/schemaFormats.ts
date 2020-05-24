@@ -81,3 +81,67 @@ export const DELETE_SECOND_CATEGORY = gql`
         deleteCategoryTwo(categoryTwoId: $input)
     }
 `;
+
+
+export const FETCH_PRODUCTS = gql`
+    {
+        allProducts{
+            name
+            categoryOne{
+                id
+                name
+                imageUrl
+                orderOfDisplay
+            }
+            categoryTwo{
+                id
+                name
+                imageUrl
+                orderOfDisplay
+                categoryOne{
+                    id
+                    name
+                    imageUrl
+                    orderOfDisplay
+                }
+            }
+            price
+            favorite
+            images
+            weight
+            purity
+            gender
+            size
+            isOnDiscount
+            isHallmark
+            isHidden
+        }
+    }
+`;
+
+export const UPDATE_PRODUCT = gql`
+    mutation updateCategory(
+        $id:String
+        $name: String!
+        $imageUrl: String!
+        $orderOfDisplay: Int!
+    ){
+        updateCategoryOne(
+            id: $id
+            name: $name
+            imageUrl: $imageUrl
+            orderOfDisplay: $orderOfDisplay
+        ) {
+            id
+            imageUrl
+            name
+            orderOfDisplay
+        }
+    }
+`;
+
+export const DELETE_PRODUCT = gql`
+    mutation deleteCategory($input: String!){
+        deleteCategoryOne(categoryOneId: $input)
+    }
+`;

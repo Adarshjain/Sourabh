@@ -1,6 +1,7 @@
 type Query {
     categoriesOne(categoryOneId: String): [CategoryOne]! @listLength(min:4,max: 12)
     categoriesTwo(categoryTwoId: String): [CategoryTwo]! @listLength(min:4,max: 12)
+    allProducts: [Product]! @listLength(min:10,max:100)
 }
 
 type Mutation {
@@ -19,6 +20,23 @@ type Mutation {
         categoryOneId: String!
     ): CategoryTwo
     deleteCategoryTwo(categoryTwoId: String!): Boolean
+    updateProduct(
+        id: String!
+        name: String!
+        categoryOne: CategoryOneInput!
+        categoryTwo: CategoryTwoInput!
+        price: Int
+        favorite: Boolean
+        images: [String]!
+        weight: String
+        purity: String
+        gender: String
+        size: String
+        isOnDiscount: Boolean
+        isHallmark: Boolean
+        isHidden: Boolean
+    ): CategoryTwo
+    deleteProduct(productId: String!): Boolean
 }
 
 type CategoryOne {
@@ -48,22 +66,44 @@ type CategoryTwo {
 }
 
 type Product {
-    name: String
+    id: String! @fake(type:zipCode)
+    name: String! @fake(type:productName)
     categoryOne: CategoryOne!
     categoryTwo: CategoryTwo!
     price: Int
-    favorite: Boolean
-    images: [String]
-    weight: UnitValueObj
-    purity: UnitValueObj
-    gender: String
-    size: String
+    favorite: Boolean @examples(values:[true,false])
+    images: [String]! @listLength(min:4,max: 12) @examples(values:[
+    "https://cdn.pixabay.com/photo/2018/08/16/19/56/wedding-rings-3611277_1280.jpg",
+  "https://random.dog/00186969-c51d-462b-948b-30a7e1735908.jpg",
+  "https://random.dog/00564ba3-e5cb-4b2b-8d97-c65a9ef26c23.png",
+  "https://random.dog/00b417af-0b5f-42d7-9ad0-6aab6c3db491.jpg",
+  "https://random.dog/027eef85-ccc1-4a66-8967-5d74f34c8bb4.jpg",
+  "https://random.dog/02f1d7d0-9ff7-44af-8066-dd9247ebe74d.jpg",
+  "https://random.dog/03024628-188b-408e-a853-d97c9f04f903.jpg",
+  "https://random.dog/037c01a0-99b3-4757-90b5-04df9be427a6.JPG",
+  "https://random.dog/0415ca3e-0e99-4afa-bec6-bd8a4a7ff6ff.PNG",
+  "https://random.dog/046e5758-d1ef-436f-b7e2-530134562445.jpg",
+  "https://random.dog/0508da24-5cbb-487c-815d-9c555e244c21.jpg"])
+    weight: String
+    purity: String
+    gender: String @examples(values:["male","female","both"])
+    size: String @fake(type: number)
     isOnDiscount: Boolean
     isHallmark: Boolean
     isHidden: Boolean
 }
 
-type UnitValueObj {
-    unit: String
-    value: Int
+input CategoryOneInput {
+    id: String!
+    name: String!
+    imageUrl: String!
+    orderOfDisplay: Int
+}
+
+input CategoryTwoInput {
+    id: String!
+    name: String!
+    imageUrl: String!
+    categoryOne: CategoryOneInput!
+    orderOfDisplay: Int
 }

@@ -3,8 +3,8 @@ import {Button} from "@ui-kitten/components";
 import React from "react";
 
 interface FooterProps {
-    onPrimaryAction: () => void
-    onSecondaryAction: () => void
+    onPrimaryAction?: () => void
+    onSecondaryAction?: () => void
     primaryText: string
     secondaryText?: string
     primaryActionType?: string

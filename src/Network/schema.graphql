@@ -1,6 +1,7 @@
 type Query {
     categoriesOne(categoryOneId: String): [CategoryOne]!
     categoriesTwo(categoryTwoId: String): [CategoryTwo]!
+    allProducts: [Product]!
 }
 
 type Mutation {
@@ -19,9 +20,33 @@ type Mutation {
         categoryOneId: String!
     ): CategoryTwo
     deleteCategoryTwo(categoryTwoId: String!): Boolean
+    updateProduct(
+        id: String
+        name: String!
+        categoryOne: CategoryOneInput!
+        categoryTwo: CategoryTwoInput!
+        price: Int
+        favorite: Boolean
+        images: [String]!
+        weight: String
+        purity: String
+        gender: String
+        size: String
+        isOnDiscount: Boolean
+        isHallmark: Boolean
+        isHidden: Boolean
+    ): CategoryTwo
+    deleteProduct(productId: String!): Boolean
 }
 
 type CategoryOne {
+    id: String!
+    name: String!
+    imageUrl: String!
+    orderOfDisplay: Int
+}
+
+input CategoryOneInput {
     id: String!
     name: String!
     imageUrl: String!
@@ -36,23 +61,27 @@ type CategoryTwo {
     orderOfDisplay: Int
 }
 
+input CategoryTwoInput {
+    id: String!
+    name: String!
+    imageUrl: String!
+    categoryOne: CategoryOneInput!
+    orderOfDisplay: Int
+}
+
 type Product {
+    id: String!
     name: String
     categoryOne: CategoryOne!
     categoryTwo: CategoryTwo!
     price: Int
     favorite: Boolean
-    images: [String]
-    weight: UnitValueObj
-    purity: UnitValueObj
+    images: [String]!
+    weight: String
+    purity: String
     gender: String
     size: String
     isOnDiscount: Boolean
     isHallmark: Boolean
     isHidden: Boolean
-}
-
-type UnitValueObj {
-    unit: String
-    value: Int
 }

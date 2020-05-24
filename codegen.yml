@@ -2,6 +2,6 @@ schema: "./src/Network/schema.graphql"
 generates:
   ./src/types.d.ts:
     plugins:
-      - ./src/Network/PrependInterfaces.js
+#      - ./src/Network/PrependInterfaces.js
       - typescript
       - typescript-operations

@@ -1,23 +1,23 @@
 import CategoryComp from "../Components/Admin/Category/CategoryComp";
 import SubCategory from "../Components/Admin/SubCategory/SecondCategory";
-import DataEntry from "../Components/Admin/Products/DataEntry";
+import ProductList from "../Components/Admin/Products/ProductList";
 import {Route} from "./routing";
 import React from "react";
 
 export default class AdminRoutes {
-    static masterPath = "/admin/"
+    static adminPath = "/admin/"
     static items = [{
         title: "Category",
-        path: AdminRoutes.masterPath + "category",
+        path: AdminRoutes.adminPath + "category",
         component: CategoryComp
     }, {
         title: "Sub category",
-        path: AdminRoutes.masterPath + "sub-category",
+        path: AdminRoutes.adminPath + "sub-category",
         component: SubCategory
     }, {
-        title: "Data entry",
-        path: AdminRoutes.masterPath + "data-entry",
-        component: DataEntry
+        title: "Products",
+        path: AdminRoutes.adminPath + "products",
+        component: ProductList
     }]
 
     static get routes() {

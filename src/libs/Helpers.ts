@@ -13,3 +13,6 @@ export function pushToArray<T>(arr: Array<T>, value: T | Array<T>): Array<T> {
     return [...arr, value];
 }
 
+export function removeDuplicatesFromArray<T>(arr: T[]): T[] {
+    return [...new Set(arr)];
+}

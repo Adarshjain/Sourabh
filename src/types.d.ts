@@ -12,6 +12,7 @@ export type Query = {
    __typename?: 'Query';
   categoriesOne: Array<Maybe<CategoryOne>>;
   categoriesTwo: Array<Maybe<CategoryTwo>>;
+  allProducts: Array<Maybe<Product>>;
 };
 
 
@@ -30,6 +31,8 @@ export type Mutation = {
   deleteCategoryOne?: Maybe<Scalars['Boolean']>;
   updateCategoryTwo?: Maybe<CategoryTwo>;
   deleteCategoryTwo?: Maybe<Scalars['Boolean']>;
+  updateProduct?: Maybe<CategoryTwo>;
+  deleteProduct?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -59,8 +62,38 @@ export type MutationDeleteCategoryTwoArgs = {
   categoryTwoId: Scalars['String'];
 };
 
+
+export type MutationUpdateProductArgs = {
+  id?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  categoryOne: CategoryOneInput;
+  categoryTwo: CategoryTwoInput;
+  price?: Maybe<Scalars['Int']>;
+  favorite?: Maybe<Scalars['Boolean']>;
+  images: Array<Maybe<Scalars['String']>>;
+  weight?: Maybe<Scalars['String']>;
+  purity?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  isOnDiscount?: Maybe<Scalars['Boolean']>;
+  isHallmark?: Maybe<Scalars['Boolean']>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationDeleteProductArgs = {
+  productId: Scalars['String'];
+};
+
 export type CategoryOne = {
    __typename?: 'CategoryOne';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  imageUrl: Scalars['String'];
+  orderOfDisplay?: Maybe<Scalars['Int']>;
+};
+
+export type CategoryOneInput = {
   id: Scalars['String'];
   name: Scalars['String'];
   imageUrl: Scalars['String'];
@@ -76,26 +109,29 @@ export type CategoryTwo = {
   orderOfDisplay?: Maybe<Scalars['Int']>;
 };
 
+export type CategoryTwoInput = {
+  id: Scalars['String'];
+  name: Scalars['String'];
+  imageUrl: Scalars['String'];
+  categoryOne: CategoryOneInput;
+  orderOfDisplay?: Maybe<Scalars['Int']>;
+};
+
 export type Product = {
    __typename?: 'Product';
+  id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   categoryOne: CategoryOne;
   categoryTwo: CategoryTwo;
   price?: Maybe<Scalars['Int']>;
   favorite?: Maybe<Scalars['Boolean']>;
-  images?: Maybe<Array<Maybe<Scalars['String']>>>;
-  weight?: Maybe<UnitValueObj>;
-  purity?: Maybe<UnitValueObj>;
+  images: Array<Maybe<Scalars['String']>>;
+  weight?: Maybe<Scalars['String']>;
+  purity?: Maybe<Scalars['String']>;
   gender?: Maybe<Scalars['String']>;
   size?: Maybe<Scalars['String']>;
   isOnDiscount?: Maybe<Scalars['Boolean']>;
   isHallmark?: Maybe<Scalars['Boolean']>;
   isHidden?: Maybe<Scalars['Boolean']>;
-};
-
-export type UnitValueObj = {
-   __typename?: 'UnitValueObj';
-  unit?: Maybe<Scalars['String']>;
-  value?: Maybe<Scalars['Int']>;
 };
 
