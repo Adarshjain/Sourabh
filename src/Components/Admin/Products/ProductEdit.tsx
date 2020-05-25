@@ -11,24 +11,24 @@ interface Props {
     onPrimaryAction: (obj: MutationUpdateProductArgs) => void | Promise<void>,
     onSecondaryAction?: () => void,
     visible: boolean
-    // name?: string;
-    // categoryOne?: CategoryOne;
-    // categoryTwo?: CategoryTwo;
-    // price?: number;
-    // images?: string[];
-    // weight?: string;
-    // purity?: string;
-    // gender?: string;
-    // size?: string;
-    // isOnDiscount?: boolean;
-    // isHallmark?: boolean;
-    // isHidden?: boolean;
+    name?: string;
+    categoryOne?: CategoryOne;
+    categoryTwo?: CategoryTwo;
+    price?: number;
+    images?: (string | undefined)[];
+    weight?: string;
+    purity?: string;
+    gender?: string;
+    size?: string;
+    isOnDiscount?: boolean;
+    isHallmark?: boolean;
+    isHidden?: boolean;
     categoriesOne: CategoryOne[]
     categoriesTwo: CategoryTwo[]
 }
 
 export default function ProductEdit(
-    {name, gender, isHallmark, isHidden, purity, size, weight, visible, onPrimaryAction, onSecondaryAction, images, categoriesOne, categoriesTwo, categoryOne, categoryTwo}: Props & MutationUpdateProductArgs
+    {name, gender, isHallmark, isHidden, purity, size, weight, visible, onPrimaryAction, onSecondaryAction, images, categoriesOne, categoriesTwo, categoryOne, categoryTwo}: Props
 ) {
     //Data states
     const [internalName, setName] = React.useState<string>(name || '');

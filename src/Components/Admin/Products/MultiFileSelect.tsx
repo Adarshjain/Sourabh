@@ -9,7 +9,7 @@ export default function MultiFileSelect({images, status, onImagesUpdate}: { imag
 
     useEffect(() => {
         onImagesUpdate && onImagesUpdate(imagesList);
-    }, [imagesList])
+    }, [imagesList,onImagesUpdate])
 
     async function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
         if (!(event && event.target && event.target.files)) {
@@ -19,7 +19,7 @@ export default function MultiFileSelect({images, status, onImagesUpdate}: { imag
             return new Promise(resolve => {
                 let reader = new FileReader();
                 reader.onload = (e) => {
-                    resolve(e.target?.result);
+                    resolve(e.target?.result as any);
                 }
                 reader.readAsDataURL(file);
             })
@@ -33,7 +33,7 @@ export default function MultiFileSelect({images, status, onImagesUpdate}: { imag
 
     return (
         <View>
-            <View style={{flexDirection: "row", width: "100%", overflow: "auto"}}>
+            <View style={{flexDirection: "row", width: "100%", overflow: "scroll"}}>
                 {imagesList.map((image, index) => <View key={image} style={styles.imageContainer}>
                     <Image style={styles.image} source={{uri: image}}/>
                     <TouchableHighlight style={styles.iconHolder} onPress={() => deleteAtIndex(index)}>

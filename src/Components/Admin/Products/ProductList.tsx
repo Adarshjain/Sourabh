@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {StyleSheet, View} from "react-native";
 import {useMutation, useQuery} from "@apollo/react-hooks";
 import {MutationUpdateProductArgs, Product} from "../../../types";

@@ -2,13 +2,18 @@ import {Layout} from "@ui-kitten/components";
 import React from "react";
 import {StyleSheet, View} from "react-native";
 import {Nav} from "./Nav";
-import {AdminArea} from "./AdminArea";
+import AdminRoutes from "../../Routers/AdminRoutes";
+import {Switch} from "../../Routers/routing";
 
-const Admin = (props) => {
+const Admin = () => {
     return (
         <Layout style={styles.container}>
             <View style={styles.nav}><Nav/></View>
-            <View style={styles.adminArea}><AdminArea {...props}/></View>
+            <View style={styles.adminArea}>
+                <Switch>
+                    {AdminRoutes.routes.map(route => route.component())}
+                </Switch>
+            </View>
         </Layout>
     )
 }

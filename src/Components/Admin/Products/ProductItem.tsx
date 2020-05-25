@@ -19,9 +19,9 @@ export default function ProductItem(
     }: Product & ExtraItems) {
     return (
         <View style={styles.card}>
-            <Image style={styles.cardImage} source={{uri: images && images[0] || ""}}/>
+            <Image style={styles.cardImage} source={{uri: (images && images[0]) || ""}}/>
             <View style={{display: "flex", flex: 1, flexDirection: "column"}}>
-                <Text style={styles.title}>{name}</Text>
+                <Text style={styles.title}>{name || ""}</Text>
                 {categoryOneName && <Text style={styles.title}>{'Category: ' + categoryOneName}</Text>}
                 {categoryTwoName && <Text style={styles.title}>{'Sub Category: ' + categoryTwoName}</Text>}
                 <View style={{flexDirection: "row", justifyContent: "space-around", marginTop: "auto"}}>

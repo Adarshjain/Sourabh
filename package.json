@@ -33,6 +33,7 @@
     "react-router-native": "^5.1.2",
     "react-scripts": "^3.4.1",
     "react-spreadsheet": "^0.4.46",
+    "styled-components": "^5.1.0",
     "webpack-bundle-analyzer": "^3.7.0"
   },
   "devDependencies": {
