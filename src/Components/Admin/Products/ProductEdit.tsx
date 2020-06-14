@@ -69,10 +69,6 @@ export default function ProductEdit(
         }
     }, [internalName, internalImages, internalWeight, selectedCategoryOne, selectedCategoryTwo]);
 
-    useEffect(() => {
-
-    }, [selectedCategoryOne]);
-
     async function onUpdate() {
         let hasError = false;
         if (internalName === "") {
@@ -80,11 +76,11 @@ export default function ProductEdit(
             hasError = true;
         }
         if (internalImages.length === 0) {
-            setInternalNameState("danger");
+            setImagesState("danger");
             hasError = true;
         }
         if (internalWeight === "") {
-            setInternalNameState("danger");
+            setInternalWeightState("danger");
             hasError = true;
         }
         if (!selectedCategoryOne) {
@@ -93,12 +89,13 @@ export default function ProductEdit(
         }
         if (!selectedCategoryTwo) {
             setSelectedCategoryTwoState("danger");
-            hasError = true;
+            // hasError = true;
         }
         if (hasError) {
             return;
         }
         setIsLoading(true);
+        debugger
         let uploadedImageURL = await uploadImage(internalImages);
         setIsLoading(false);
         if (!hasError) {
