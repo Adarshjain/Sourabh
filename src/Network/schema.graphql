@@ -1,82 +1,42 @@
-type Query {
-    categoriesOne(categoryOneId: String): [CategoryOne]!
-    categoriesTwo(categoryTwoId: String): [CategoryTwo]!
-    allProducts: [Product]!
-}
-
-type Mutation {
-    updateCategoryOne(
-        id:String
-        name: String!
-        imageUrl: String!
-        orderOfDisplay: Int!
-    ): CategoryOne
-    deleteCategoryOne(categoryOneId: String!): Boolean
-    updateCategoryTwo(
-        id:String
-        name: String!
-        imageUrl: String!
-        orderOfDisplay: Int!
-        categoryOneId: String!
-    ): CategoryTwo
-    deleteCategoryTwo(categoryTwoId: String!): Boolean
-    updateProduct(
-        id: String
-        name: String!
-        categoryOne: CategoryOneInput!
-        categoryTwo: CategoryTwoInput!
-        price: Int
-        favorite: Boolean
-        images: [String]!
-        weight: String
-        purity: String
-        gender: String
-        size: String
-        isOnDiscount: Boolean
-        isHallmark: Boolean
-        isHidden: Boolean
-    ): CategoryTwo
-    deleteProduct(productId: String!): Boolean
-}
-
 type CategoryOne {
-    id: String!
-    name: String!
-    imageUrl: String!
-    orderOfDisplay: Int
-}
-
-input CategoryOneInput {
-    id: String!
-    name: String!
-    imageUrl: String!
-    orderOfDisplay: Int
+  id: ID!
+  name: String!
+  imageUrl: String!
+  orderOfDisplay: Int
 }
 
 type CategoryTwo {
-    id: String!
-    name: String!
-    imageUrl: String!
-    categoryOne: CategoryOne!
-    orderOfDisplay: Int
+  id: ID!
+  name: String!
+  imageUrl: String!
+  orderOfDisplay: Int
+  categoryOne: CategoryOne!
 }
 
-input CategoryTwoInput {
-    id: String!
+type Mutation {
+  updateCategoryOne(
+    id: ID
     name: String!
-    imageUrl: String!
-    categoryOne: CategoryOneInput!
-    orderOfDisplay: Int
-}
-
-type Product {
-    id: String!
-    name: String
-    categoryOne: CategoryOne!
-    categoryTwo: CategoryTwo!
-    price: Int
+    image: String
+    orderOfDisplay: Int!
+  ): CategoryOne!
+  deleteCategoryOne(id: ID!): Boolean
+  updateCategoryTwo(
+    id: ID
+    name: String!
+    image: String
+    orderOfDisplay: Int!
+    categoryOne: ID!
+  ): CategoryTwo!
+  deleteCategoryTwo(id: ID!): Boolean
+  updateProduct(
+    id: ID
+    name: String!
+    categoryOne: ID!
+    categoryTwo: ID!
+    price: Float
     favorite: Boolean
-    images: [String]!
+    image: [String]
     weight: String
     purity: String
     gender: String
@@ -84,4 +44,29 @@ type Product {
     isOnDiscount: Boolean
     isHallmark: Boolean
     isHidden: Boolean
+  ): Product!
+  deleteProduct(id: ID!): Boolean
+}
+
+type Product {
+  id: ID!
+  name: String
+  categoryOne: CategoryOne!
+  categoryTwo: CategoryTwo!
+  price: Float
+  favorite: Boolean
+  weight: String
+  purity: String
+  gender: String
+  size: String
+  isOnDiscount: Boolean
+  isHallmark: Boolean
+  isHidden: Boolean
+  images: [String]
+}
+
+type Query {
+  categoriesOne(categoryOneId: ID): [CategoryOne]!
+  categoriesTwo(categoryTwoId: ID): [CategoryTwo]!
+  allProducts(productId: ID): [Product]!
 }
