@@ -27,7 +27,7 @@ function ProductList({data: {allProducts}}: AllProductResponse) {
     const [currentProduct, setCurrentProduct] = useState<Product | undefined>(undefined);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const [updateProduct] = useMutation<{ updateProduct: Product }, MutationUpdateProductArgs>(UPDATE_PRODUCT);
-    const [deleteProduct] = useMutation<{ deleteCategory: boolean }, string>(DELETE_PRODUCT);
+    const [deleteProduct] = useMutation<{ deleteProduct: boolean }, {id:string}>(DELETE_PRODUCT);
     const {loading: loadingOne, error: errorOne, data: categoriesOne} = useQuery(FETCH_CATEGORIES);
     const {loading: loadingTwo, error: errorTwo, data: categoriesTwo} = useQuery(FETCH_SECOND_CATEGORIES);
 
@@ -37,8 +37,6 @@ function ProductList({data: {allProducts}}: AllProductResponse) {
     if (errorOne || errorTwo) {
         return <AdminError/>
     }
-
-
 
     async function onCategoryUpdate(tempProduct: MutationUpdateProductArgs) {
         setIsEditPopupVisible(false);
@@ -79,10 +77,12 @@ function ProductList({data: {allProducts}}: AllProductResponse) {
             return;
         }
         let {data} = await deleteProduct({
-            variables: currentProduct.id
+            variables: {
+                id: currentProduct.id
+            }
         });
 
-        if (data && data.deleteCategory) {
+        if (data && data.deleteProduct) {
             let categoryIndex = internalProducts.findIndex(cat => cat.id === currentProduct.id);
             let splicedArray = getSplicedArray(internalProducts, categoryIndex);
             updateCategories(splicedArray);

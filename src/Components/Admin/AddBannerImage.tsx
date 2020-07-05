@@ -1,29 +1,23 @@
 import {StyleSheet, View} from "react-native";
 import {Button, Card, Input, Modal, Text} from "@ui-kitten/components";
 import React, {ChangeEvent, useEffect} from "react";
-import UploadButton from "../../Common/UploadButton";
-import Category from "../../Common/Category";
-import {MutationUpdateCategoryOneArgs} from "../../../types";
-import {uploadImage} from "../../../libs/FileUpload";
-import Loading from "../../Common/Loading";
+import UploadButton from "../Common/UploadButton";
+import {uploadImage} from "../../libs/FileUpload";
+import Loading from "../Common/Loading";
+import Category from "../Common/Category";
 
 interface Props {
-    onPrimaryAction: (obj: MutationUpdateCategoryOneArgs) => void | Promise<void>,
+    onPrimaryAction: (obj: { orderOfDisplay: number, url: string }) => void | Promise<void>,
     onSecondaryAction: () => void,
     visible: boolean
-    name?: string,
-    orderOfDisplay?: any,
-    imageUrl?: string
 }
 
-export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, orderOfDisplay, imageUrl, visible}: Props) {
+export default function AddBannerImage({onPrimaryAction, onSecondaryAction, visible}: Props) {
     //Data states
-    const [internalName, setName] = React.useState(name || '');
-    const [internalOrderOfDisplay, setOrderOfDisplay] = React.useState(orderOfDisplay || '');
+    const [internalOrderOfDisplay, setOrderOfDisplay] = React.useState('');
     const [file, setFile] = React.useState<any>(undefined);
 
     //Input states
-    const [internalNameState, setInternalNameState] = React.useState("basic");
     const [internalOrderOfDisplayState, setInternalOrderOfDisplayState] = React.useState("basic");
     const [fileState, setFileState] = React.useState("basic");
 
@@ -32,28 +26,21 @@ export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, 
     const [isLoading, setIsLoading] = React.useState(false);
 
     useEffect(() => {
-        if (internalName !== "") {
-            setInternalNameState("basic");
-        }
         if (internalOrderOfDisplay !== "") {
             setInternalOrderOfDisplayState("basic");
         }
         if (!!file) {
             setFileState("basic");
         }
-    }, [internalName, internalOrderOfDisplay, file]);
+    }, [internalOrderOfDisplay, file]);
 
     async function onUpdate() {
         let hasError = false;
-        if (internalName === "") {
-            setInternalNameState("danger");
-            hasError = true;
-        }
         if (internalOrderOfDisplay === "") {
             setInternalOrderOfDisplayState("danger");
             hasError = true;
         }
-        if (!imageUrl && !file) {
+        if (!file) {
             setFileState("danger");
             hasError = true;
         }
@@ -66,9 +53,8 @@ export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, 
         }
         if (!hasError) {
             onPrimaryAction({
-                name: internalName,
                 orderOfDisplay: parseInt(internalOrderOfDisplay),
-                image: uploadedImageURL || imageUrl || ""
+                url: uploadedImageURL || ""
             });
         }
     }
@@ -109,13 +95,6 @@ export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, 
                             <View style={{flex: 1}}>
                                 <Input
                                     style={styles.input}
-                                    value={internalName}
-                                    label='Name'
-                                    status={internalNameState}
-                                    onChangeText={name => setName(name)}
-                                />
-                                <Input
-                                    style={styles.input}
                                     value={internalOrderOfDisplay}
                                     label='Order of display'
                                     status={internalOrderOfDisplayState}
@@ -125,9 +104,9 @@ export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, 
                                 <UploadButton status={fileState} onChange={onFileSelected}>Pick Image</UploadButton>
                             </View>
                             {
-                                (imageData || imageUrl) &&
+                                (imageData) &&
                                 <View style={{flex: 1}}>
-                                    <Category name={internalName} disabled={false} imageUrl={imageData || imageUrl}/>
+                                    <Category disabled={false} imageUrl={imageData}/>
                                 </View>
                             }
                         </View>
@@ -174,8 +153,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     footerControl: {
-        marginLeft:2,
-        marginRight:2
+        marginLeft: 2,
+        marginRight: 2
     },
     input: {
         marginBottom: 12

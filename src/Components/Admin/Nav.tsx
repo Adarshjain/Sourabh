@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
-import {IndexPath, Menu, MenuItem} from '@ui-kitten/components';
 import {useHistory, useLocation} from "../../Routers/routing";
 import AdminRoutes from "../../Routers/AdminRoutes";
+import {Text, TouchableOpacity, View} from "react-native";
 
 export const Nav = () => {
 
-    const [selectedIndex, setSelectedIndex] = React.useState<IndexPath | undefined>(undefined);
+    const [selectedPath, setSelectedPath] = React.useState<string | undefined>(undefined);
     let history = useHistory();
     let loc = useLocation();
     let adminRoutes = AdminRoutes.items;
@@ -16,22 +16,33 @@ export const Nav = () => {
             history.replace(i);
             loc.pathname = i;
         }
-        let indexPath: IndexPath = new IndexPath(AdminRoutes.getIndexFromPath(loc.pathname));
-        setSelectedIndex(indexPath);
+        setSelectedPath(loc.pathname);
     }, [loc.pathname, history]);
 
-    function onSelectMenu(index: IndexPath) {
-        history.push(`${AdminRoutes.getPathFromIndex(index.row)}`);
-        setSelectedIndex(index);
+    function onSelectMenu(path: string) {
+        history.push(path);
+        setSelectedPath(path);
     }
 
     return (
-        <Menu
-            selectedIndex={selectedIndex}
-            onSelect={onSelectMenu}
-        >
-            {adminRoutes.map(route => <MenuItem title={route.title} key={route.path}/>)}
-        </Menu>
+        <View style={{width: '100%', display: "flex", flexDirection: "row"}}>
+            {adminRoutes.map(route => {
+                let css = {};
+                if (route.path === selectedPath) {
+                    css = {fontWeight: "bold", color: "rgb(51, 102, 255)"}
+                }
+                return <TouchableOpacity
+                    key={route.path} style={{padding: 16}}
+                    onPress={() => onSelectMenu(route.path)}
+                >
+                    <Text style={Object.assign({
+                        fontSize: 15,
+                        minWidth: 90,
+                        textAlign: "center"
+                    }, css)}>{route.title}</Text>
+                </TouchableOpacity>
+            })}
+        </View>
     );
 };
 

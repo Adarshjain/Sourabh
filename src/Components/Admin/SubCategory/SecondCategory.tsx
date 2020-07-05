@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import {StyleSheet, View} from "react-native";
 import {useMutation} from "@apollo/react-hooks";
 import {CategoryTwo, MutationUpdateCategoryTwoArgs} from "../../../types";
-import Category from "../../Common/Category";
 import {DELETE_SECOND_CATEGORY, FETCH_SECOND_CATEGORIES, UPDATE_SECOND_CATEGORY} from "../../../Network/schemaFormats";
 import SecondCategoryEdit from "./SecondCategoryEdit";
 import {Button, Text} from "@ui-kitten/components";
 import GqlQueryWrapper from "../../Common/GqlQueryWrapper";
 import {getSplicedArray, pushToArray, replaceArrayAt} from "../../../libs/Helpers";
 import ConfirmationPopup from "../../Common/ConfirmationPopup";
+import SubCategory from "../../Common/SubCategory";
 
 interface CategoryResponse {
     data: { categoriesTwo: CategoryTwo[] }
@@ -21,16 +21,16 @@ function SecondCategoryComp({data: {categoriesTwo}}: CategoryResponse) {
     const [internalCategories, updateCategories] = useState<CategoryTwo[]>(categoriesTwo || []);
     const [currentCategory, setCurrentCategory] = useState<CategoryTwo | undefined>(undefined);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-    const [updateCategory] = useMutation<{ updateSecondCategory: CategoryTwo }, MutationUpdateCategoryTwoArgs>(UPDATE_SECOND_CATEGORY);
-    const [deleteCategory] = useMutation<{ deleteSecondCategory: boolean }, string>(DELETE_SECOND_CATEGORY);
+    const [updateCategory] = useMutation<{ updateCategoryTwo: CategoryTwo }, MutationUpdateCategoryTwoArgs>(UPDATE_SECOND_CATEGORY);
+    const [deleteCategory] = useMutation<{ deleteCategoryTwo: boolean }, { id: string }>(DELETE_SECOND_CATEGORY);
 
     async function onCategoryUpdate(tempCategory: MutationUpdateCategoryTwoArgs) {
         setIsEditPopupVisible(false);
         if (!!currentCategory) {
             if (tempCategory.name === currentCategory.name
                 && tempCategory.orderOfDisplay === currentCategory.orderOfDisplay
-                && tempCategory.categoryOneId === currentCategory.categoryOne.id
-                && tempCategory.imageUrl === currentCategory.imageUrl) {
+                && tempCategory.categoryOne === currentCategory.categoryOne.id
+                && tempCategory.image === currentCategory.imageUrl) {
                 setCurrentCategory(undefined);
                 return;
             }
@@ -39,12 +39,12 @@ function SecondCategoryComp({data: {categoriesTwo}}: CategoryResponse) {
         let category = await updateCategory({
             variables: tempCategory
         });
-        if (category.data !== undefined && category.data.updateSecondCategory !== undefined) {
+        if (category.data !== undefined && category.data.updateCategoryTwo !== undefined) {
             if (!!currentCategory) {
                 let foundIndex = internalCategories.findIndex(cat => cat.id === currentCategory.id)
-                updateCategories(replaceArrayAt(internalCategories, foundIndex, category.data!.updateSecondCategory))
+                updateCategories(replaceArrayAt(internalCategories, foundIndex, category.data!.updateCategoryTwo))
             } else {
-                updateCategories(pushToArray(internalCategories, category.data!.updateSecondCategory))
+                updateCategories(pushToArray(internalCategories, category.data!.updateCategoryTwo))
             }
         }
         setCurrentCategory(undefined);
@@ -71,10 +71,12 @@ function SecondCategoryComp({data: {categoriesTwo}}: CategoryResponse) {
             return;
         }
         let {data} = await deleteCategory({
-            variables: currentCategory.id
+            variables: {
+                id: currentCategory.id
+            }
         });
 
-        if (data && data.deleteSecondCategory) {
+        if (data && data.deleteCategoryTwo) {
             let categoryIndex = internalCategories.findIndex(cat => cat.id === currentCategory.id);
             let splicedArray = getSplicedArray(internalCategories, categoryIndex);
             updateCategories(splicedArray);
@@ -101,7 +103,7 @@ function SecondCategoryComp({data: {categoriesTwo}}: CategoryResponse) {
                 {
                     internalCategories.map(category =>
                         <View key={category.id}>
-                            <Category {...category} disabled={true}/>
+                            <SubCategory {...category}/>
                             <View style={{flexDirection: "row", justifyContent: "space-around"}}>
                                 <Button
                                     size="small"

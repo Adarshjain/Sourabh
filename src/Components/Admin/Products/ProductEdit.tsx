@@ -25,10 +25,16 @@ interface Props {
     isHidden?: boolean;
     categoriesOne: CategoryOne[]
     categoriesTwo: CategoryTwo[]
+    description?: string
+    isFeatured?: boolean
+    isTrending?: boolean
 }
 
 export default function ProductEdit(
-    {name, gender, isHallmark, isHidden, purity, size, weight, visible, onPrimaryAction, onSecondaryAction, images, categoriesOne, categoriesTwo, categoryOne, categoryTwo}: Props
+    {
+        name, gender, isHallmark, isHidden, purity, size, weight, visible, onPrimaryAction, onSecondaryAction,
+        images, categoriesOne, categoriesTwo, categoryOne, categoryTwo, description, isFeatured, isTrending
+    }: Props
 ) {
     //Data states
     const [internalName, setName] = React.useState<string>(name || '');
@@ -39,11 +45,15 @@ export default function ProductEdit(
     const [internalHallmark, setHallmark] = React.useState<boolean>(!!isHallmark);
     const [internalHidden, setHidden] = React.useState<boolean>(!!isHidden);
     const [internalImages, setImages] = React.useState<any[]>(images || []);
+    const [internalDesc, setDesc] = React.useState<string>(description || '');
     const [selectedCategoryOne, setCategoryOne] = React.useState<string | undefined>(categoryOne?.id);
     const [selectedCategoryTwo, setCategoryTwo] = React.useState<string | undefined>(categoryTwo?.id);
+    const [internalIsFeatured, setIsFeatured] = React.useState<boolean>(!!isFeatured);
+    const [internalIsTrending, setIsTrending] = React.useState<boolean>(!!isTrending);
     //Input states
     const [internalNameState, setInternalNameState] = React.useState("basic");
     const [internalWeightState, setInternalWeightState] = React.useState("basic");
+    const [internalSizeState, setInternalSizeState] = React.useState("basic");
     const [imagesState, setImagesState] = React.useState("basic");
     const [selectedCategoryOneState, setSelectedCategoryOneState] = React.useState("basic");
     const [selectedCategoryTwoState, setSelectedCategoryTwoState] = React.useState("basic");
@@ -61,13 +71,20 @@ export default function ProductEdit(
         if (internalWeight !== "") {
             setInternalWeightState("basic");
         }
+        if (internalSize !== "") {
+            setInternalSizeState("basic");
+        }
         if (!!selectedCategoryOne) {
             setSelectedCategoryOneState("basic");
         }
         if (!!selectedCategoryTwo) {
             setSelectedCategoryTwoState("basic");
         }
-    }, [internalName, internalImages, internalWeight, selectedCategoryOne, selectedCategoryTwo]);
+    }, [internalName, internalImages, internalWeight, internalSize, selectedCategoryOne, selectedCategoryTwo]);
+
+    useEffect(() => {
+        setCategoryTwo(undefined);
+    }, [selectedCategoryOne]);
 
     async function onUpdate() {
         let hasError = false;
@@ -83,6 +100,10 @@ export default function ProductEdit(
             setInternalWeightState("danger");
             hasError = true;
         }
+        if (internalSize === "") {
+            setInternalSizeState("danger");
+            hasError = true;
+        }
         if (!selectedCategoryOne) {
             setSelectedCategoryOneState("danger");
             hasError = true;
@@ -95,20 +116,22 @@ export default function ProductEdit(
             return;
         }
         setIsLoading(true);
-        debugger
         let uploadedImageURL = await uploadImage(internalImages);
         setIsLoading(false);
         if (!hasError) {
             onPrimaryAction({
                 name: internalName,
                 //@ts-ignore
-                categoryOne: categoriesOne.find(cat => cat.id === selectedCategoryOne),
+                categoryOne: categoriesOne.find(cat => cat.id === selectedCategoryOne).id,
                 //@ts-ignore
-                categoryTwo: categoriesTwo.find(cat => cat.id === selectedCategoryTwo),
+                categoryTwo: categoriesTwo.find(cat => cat.id === selectedCategoryTwo).id,
+                description: internalDesc,
                 gender: internalGender,
                 images: uploadedImageURL,
                 isHallmark: internalHallmark,
                 isHidden: internalHidden,
+                isFeatured: internalIsFeatured,
+                isTrending: internalIsTrending,
                 purity: internalPurity,
                 size: internalSize,
                 weight: internalWeight
@@ -136,6 +159,7 @@ export default function ProductEdit(
                     >
                         <View>
                             <View style={{flexDirection: "row"}}>
+                                {/* CategoryOne */}
                                 <Select
                                     style={[styles.input, {width: "calc(50% - 12px)", marginRight: 12}]}
                                     status={selectedCategoryOneState}
@@ -157,6 +181,7 @@ export default function ProductEdit(
                                             )
                                     }
                                 </Select>
+                                {/* CategoryTwo */}
                                 <Select
                                     style={[styles.input, {width: "50%"}]}
                                     status={selectedCategoryTwoState}
@@ -165,7 +190,7 @@ export default function ProductEdit(
                                     value={categoriesTwo.find(cat => cat.id === selectedCategoryTwo)?.name}
                                     onSelect={(selected) => {
                                         if (selected instanceof IndexPath) {
-                                            setCategoryTwo(categoriesTwo[selected.row].id)
+                                            setCategoryTwo(categoriesTwo.filter(categ => categ.categoryOne.id === selectedCategoryOne)[selected.row].id)
                                         }
                                     }}
                                 >
@@ -180,6 +205,7 @@ export default function ProductEdit(
                                     }
                                 </Select>
                             </View>
+                            {/* Name */}
                             <Input
                                 style={styles.input}
                                 value={internalName}
@@ -187,6 +213,27 @@ export default function ProductEdit(
                                 status={internalNameState}
                                 onChangeText={name => setName(name)}
                             />
+                            <label>
+                                <Text style={{
+                                    color: 'rgb(143, 155, 179)',
+                                    fontSize: 12,
+                                    fontWeight: '800',
+                                    marginBottom: '4px'
+                                }}>Description</Text>
+                                <textarea
+                                    onChange={e => setDesc(e.target.value)}
+                                    value={internalDesc}
+                                    style={{
+                                        width: "100%",
+                                        borderColor: "rgb(228, 233, 242)",
+                                        borderRadius: '4px',
+                                        borderWidth: '1px',
+                                        minHeight: '40px',
+                                        padding: 8,
+                                        backgroundColor: "rgb(247, 249, 252)",
+                                        fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif'
+                                    }}/>
+                            </label>
                             {/*Weight & Purity*/}
                             <View style={{flexDirection: "row"}}>
                                 <Input
@@ -215,35 +262,49 @@ export default function ProductEdit(
                                 }}>Gender </Text>
                                 <Radio
                                     style={{marginRight: 12}}
-                                    checked={internalGender === "male"}
-                                    onChange={nextChecked => nextChecked && setGender('male')}>
+                                    checked={internalGender === "Men"}
+                                    onChange={nextChecked => nextChecked && setGender('Men')}>
                                     Male
                                 </Radio>
                                 <Radio
                                     style={{marginRight: 12}}
-                                    checked={internalGender === "female"}
-                                    onChange={nextChecked => nextChecked && setGender('female')}>
+                                    checked={internalGender === "Women"}
+                                    onChange={nextChecked => nextChecked && setGender('Women')}>
                                     Female
                                 </Radio>
                                 <Radio
-                                    checked={internalGender === "both"}
-                                    onChange={nextChecked => nextChecked && setGender('both')}>
+                                    checked={internalGender === "Unisex"}
+                                    onChange={nextChecked => nextChecked && setGender('Unisex')}>
                                     Unisex
                                 </Radio>
+                                <Radio
+                                    checked={internalGender === "Kids"}
+                                    onChange={nextChecked => nextChecked && setGender('Kids')}>
+                                    Kids
+                                </Radio>
                             </View>
+                            {/* Size */}
                             <Input
                                 style={styles.input}
                                 value={internalSize}
+                                status={internalSizeState}
                                 label='Size'
+                                keyboardType="numeric"
                                 onChangeText={size => setSize(size)}
                             />
                             <View style={{flexDirection: "row", marginBottom: 12}}>
                                 <CheckBox
                                     checked={internalHallmark}
                                     onChange={yes => setHallmark(yes)}>Hallmark</CheckBox>
+                                {/*<CheckBox*/}
+                                {/*    checked={internalHidden}*/}
+                                {/*    onChange={yes => setHidden(yes)}>Hide</CheckBox>*/}
                                 <CheckBox
-                                    checked={internalHidden}
-                                    onChange={yes => setHidden(yes)}>Hide</CheckBox>
+                                    checked={internalIsFeatured}
+                                    onChange={yes => setIsFeatured(yes)}>Featured Product</CheckBox>
+                                <CheckBox
+                                    checked={internalIsTrending}
+                                    onChange={yes => setIsTrending(yes)}>Trending Product</CheckBox>
                             </View>
                             <MultiFileSelect status={imagesState} images={internalImages} onImagesUpdate={setImages}/>
                         </View>

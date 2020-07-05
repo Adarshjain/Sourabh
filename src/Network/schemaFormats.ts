@@ -13,15 +13,15 @@ export const FETCH_CATEGORIES = gql`
 
 export const UPDATE_CATEGORY = gql`
     mutation updateCategory(
-        $id:String
+        $id: ID
         $name: String!
-        $imageUrl: String!
+        $image: String
         $orderOfDisplay: Int!
     ){
         updateCategoryOne(
             id: $id
             name: $name
-            imageUrl: $imageUrl
+            image: $image
             orderOfDisplay: $orderOfDisplay
         ) {
             id
@@ -33,8 +33,8 @@ export const UPDATE_CATEGORY = gql`
 `;
 
 export const DELETE_CATEGORY = gql`
-    mutation deleteCategory($input: String!){
-        deleteCategoryOne(categoryOneId: $input)
+    mutation deleteCategory($id: ID!){
+        deleteCategoryOne(id: $id)
     }
 `;
 
@@ -54,19 +54,19 @@ export const FETCH_SECOND_CATEGORIES = gql`
 `;
 
 export const UPDATE_SECOND_CATEGORY = gql`
-    mutation updateSecondCategory(
-        $id:String
+    mutation updateCategoryTwo(
+        $id: ID
         $name: String!
-        $imageUrl: String!
+        $image: String
         $orderOfDisplay: Int!
-        $categoryOneId: String!
+        $categoryOne: ID!
     ){
         updateCategoryTwo(
             id: $id
             name: $name
-            imageUrl: $imageUrl
+            image: $image
             orderOfDisplay: $orderOfDisplay
-            categoryOneId: $categoryOneId
+            categoryOne: $categoryOne
         ) {
             id
             imageUrl
@@ -77,37 +77,37 @@ export const UPDATE_SECOND_CATEGORY = gql`
 `;
 
 export const DELETE_SECOND_CATEGORY = gql`
-    mutation deleteSecondCategory($input: String!){
-        deleteCategoryTwo(categoryTwoId: $input)
+    mutation deleteCategoryTwo($id: ID!){
+        deleteCategoryTwo(id: $id)
     }
 `;
-
 
 export const FETCH_PRODUCTS = gql`
     {
         allProducts{
+            id
             name
+            description
             categoryOne{
                 id
-                name
                 imageUrl
+                name
                 orderOfDisplay
             }
             categoryTwo{
                 id
-                name
                 imageUrl
+                name
                 orderOfDisplay
                 categoryOne{
                     id
-                    name
                     imageUrl
+                    name
                     orderOfDisplay
                 }
             }
             price
             favorite
-            images
             weight
             purity
             gender
@@ -115,33 +115,110 @@ export const FETCH_PRODUCTS = gql`
             isOnDiscount
             isHallmark
             isHidden
+            isFeatured
+            isTrending
+            images
         }
     }
 `;
 
 export const UPDATE_PRODUCT = gql`
-    mutation updateCategory(
-        $id:String
+    mutation updateProduct(
+        $id: ID
+        $description: String
         $name: String!
-        $imageUrl: String!
-        $orderOfDisplay: Int!
+        $categoryOne: ID!
+        $categoryTwo: ID!
+        $price: Float
+        $favorite: Boolean
+        $image: [String]
+        $weight: String
+        $purity: String
+        $gender: String
+        $size: String
+        $isOnDiscount: Boolean
+        $isHallmark: Boolean
+        $isFeatured: Boolean
+        $isTrending: Boolean
+        $isHidden: Boolean
     ){
-        updateCategoryOne(
+        updateProduct(
             id: $id
+            description: $description
             name: $name
-            imageUrl: $imageUrl
-            orderOfDisplay: $orderOfDisplay
+            categoryOne: $categoryOne
+            categoryTwo: $categoryTwo
+            price: $price
+            favorite: $favorite
+            images: $image
+            weight: $weight
+            purity: $purity
+            gender: $gender
+            size: $size
+            isOnDiscount: $isOnDiscount
+            isHallmark: $isHallmark
+            isTrending: $isTrending
+            isFeatured: $isFeatured
+            isHidden: $isHidden
         ) {
             id
-            imageUrl
             name
-            orderOfDisplay
+            description
+            categoryOne{
+                id
+                imageUrl
+                name
+                orderOfDisplay
+            }
+            categoryTwo{
+                id
+                imageUrl
+                name
+                orderOfDisplay
+                categoryOne{
+                    id
+                    imageUrl
+                    name
+                    orderOfDisplay
+                }
+            }
+            price
+            favorite
+            weight
+            purity
+            gender
+            size
+            isOnDiscount
+            isHallmark
+            isHidden
+            isFeatured
+            isTrending
+            images
         }
     }
 `;
 
 export const DELETE_PRODUCT = gql`
-    mutation deleteCategory($input: String!){
-        deleteCategoryOne(categoryOneId: $input)
+    mutation deleteProduct($id: ID!){
+        deleteProduct(id: $id)
+    }
+`;
+
+export const FETCH_MISC = gql`
+    query findMisc($key:[ID]!){
+        findMisc(key: $key){
+            value
+        }
+    }
+`;
+
+export const UPDATE_MISC = gql`
+    mutation updateMisc($key: String!, $value: String!){
+        updateMisc(
+            key: $key
+            value: $value
+        ) {
+            value
+        }
     }
 `;

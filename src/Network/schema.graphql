@@ -1,16 +1,31 @@
 type CategoryOne {
   id: ID!
   name: String!
-  imageUrl: String!
+  imageUrl: String
   orderOfDisplay: Int
 }
 
 type CategoryTwo {
   id: ID!
   name: String!
-  imageUrl: String!
+  imageUrl: String
   orderOfDisplay: Int
   categoryOne: CategoryOne!
+}
+
+type Filter {
+  categoriesOne: [CategoryOne]!
+  categoriesTwo: [CategoryTwo]!
+  price: [Float]
+  weight: [String]
+  purity: [String]
+  gender: [String]
+  size: [String]
+  booleans: [String]
+}
+
+type Misc {
+  value: String
 }
 
 type Mutation {
@@ -18,25 +33,26 @@ type Mutation {
     id: ID
     name: String!
     image: String
-    orderOfDisplay: Int!
+    orderOfDisplay: Int
   ): CategoryOne!
   deleteCategoryOne(id: ID!): Boolean
   updateCategoryTwo(
     id: ID
     name: String!
     image: String
-    orderOfDisplay: Int!
+    orderOfDisplay: Int
     categoryOne: ID!
   ): CategoryTwo!
   deleteCategoryTwo(id: ID!): Boolean
   updateProduct(
     id: ID
     name: String!
+    description: String
     categoryOne: ID!
     categoryTwo: ID!
     price: Float
     favorite: Boolean
-    image: [String]
+    images: [String]
     weight: String
     purity: String
     gender: String
@@ -44,13 +60,17 @@ type Mutation {
     isOnDiscount: Boolean
     isHallmark: Boolean
     isHidden: Boolean
+    isFeatured: Boolean
+    isTrending: Boolean
   ): Product!
   deleteProduct(id: ID!): Boolean
+  updateMisc(key: String!, value: String!): Misc
 }
 
 type Product {
   id: ID!
   name: String
+  description: String
   categoryOne: CategoryOne!
   categoryTwo: CategoryTwo!
   price: Float
@@ -63,10 +83,28 @@ type Product {
   isHallmark: Boolean
   isHidden: Boolean
   images: [String]
+  isFeatured:Boolean
+  isTrending: Boolean
 }
 
 type Query {
   categoriesOne(categoryOneId: ID): [CategoryOne]!
   categoriesTwo(categoryTwoId: ID): [CategoryTwo]!
   allProducts(productId: ID): [Product]!
+  filters: Filter!
+  filterProduct(
+    productId:[ID]
+    categoriesOne: [ID]
+    categoriesTwo: [ID]
+    price: [Float]
+    weight: [String]
+    purity: [String]
+    gender: [String]
+    size: [String]
+    isHallmark: Boolean
+    isFeatured: Boolean
+    isTrending: Boolean
+  ): [Product]!
+  findMisc(key: [ID]!): Misc
 }
+

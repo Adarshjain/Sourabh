@@ -24,23 +24,15 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         justifyContent: 'flex-start',
-        flexDirection: "row"
+        flexDirection: "column"
     },
     nav: {
-        width: 250,
-        height: "100%",
-        shadowOffset: {
-            width: 0,
-            height: 8
-        },
-        shadowOpacity: 1,
-        shadowRadius: 20,
-        shadowColor: "rgb(218,224,235)",
-        zIndex: 100
+        width: '100%',
+        borderBottomColor: 'rgba(0,0,0,0.2)',
+        borderBottomWidth: 1,
+            zIndex: 100
     },
     adminArea: {
-        flex: 1,
-        maxHeight: "100vh",
         overflow: "scroll"
     }
 });

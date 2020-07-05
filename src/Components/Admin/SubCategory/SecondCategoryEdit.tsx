@@ -93,8 +93,8 @@ function SecondCategoryEdit(
             onPrimaryAction({
                 name: internalName,
                 orderOfDisplay: parseInt(internalOrderOfDisplay),
-                imageUrl: uploadedImageURL || imageUrl || "",
-                categoryOneId: selectedCategory || ""
+                image: uploadedImageURL || imageUrl || "",
+                categoryOne: selectedCategory || ""
             });
         }
     }
@@ -104,6 +104,14 @@ function SecondCategoryEdit(
             return;
         }
         setFile(event.target.files[0]);
+        if (!event.target.files[0].type.startsWith('image')) {
+            alert('The file selected is not an image.');
+            return;
+        }
+        if (event.target.files[0].size > 24000) {
+            alert('file size is large.');
+            return;
+        }
         let reader = new FileReader();
         reader.onload = (e) => {
             setImageData(e.target?.result);

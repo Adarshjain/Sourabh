@@ -3,9 +3,10 @@ import SubCategory from "../Components/Admin/SubCategory/SecondCategory";
 import ProductList from "../Components/Admin/Products/ProductList";
 import {Route} from "./routing";
 import React from "react";
+import BannerImages from "../Components/Admin/BannerImages";
 
 export default class AdminRoutes {
-    static adminPath = "/admin/"
+    static adminPath = "/"
     static items = [{
         title: "Category",
         path: AdminRoutes.adminPath + "category",
@@ -18,6 +19,10 @@ export default class AdminRoutes {
         title: "Products",
         path: AdminRoutes.adminPath + "products",
         component: ProductList
+    }, {
+        title: "Banner images",
+        path: AdminRoutes.adminPath + "banner",
+        component: BannerImages
     }]
 
     static get routes() {

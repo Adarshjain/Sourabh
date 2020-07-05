@@ -1,8 +1,9 @@
 import {Image, StyleSheet} from "react-native";
 import {Card, Text} from "@ui-kitten/components";
 import React from "react";
+import {CategoryTwo} from "../../types";
 
-export default function Category({imageUrl, name}: any) {
+export default function SubCategory({imageUrl, name, categoryOne}: CategoryTwo) {
     return (
         <Card
             disabled={true}
@@ -12,9 +13,8 @@ export default function Category({imageUrl, name}: any) {
                     source={{uri: imageUrl}}
                 />}
             style={styles.card}>
-            {
-                name && <Text style={styles.title}>{name}</Text>
-            }
+            <Text style={styles.title}>{name}</Text>
+            <Text style={styles.title}>{categoryOne.name}</Text>
         </Card>
     )
 }

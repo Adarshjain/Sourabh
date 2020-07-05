@@ -4,9 +4,9 @@ import AdminLoading from "./Loading";
 import AdminError from "./Error";
 import {DocumentNode} from "graphql";
 
-export default function GqlQueryWrapper<T>(Component, gqlQuery: DocumentNode) {
+export default function GqlQueryWrapper<T>(Component, gqlQuery: DocumentNode,vars?:T) {
     return function GqlQueryWrapperInner(props) {
-        const {loading, error, data} = useQuery(gqlQuery);
+        const {loading, error, data} = useQuery(gqlQuery,vars);
         if (loading) {
             return <AdminLoading/>
         }
