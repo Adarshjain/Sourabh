@@ -1,0 +1,2 @@
+/graphql/*    http://lancincatalog.me/graphql/:splat 200!
+/*    /index.html   200
