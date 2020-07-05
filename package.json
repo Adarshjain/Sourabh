@@ -7,7 +7,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "start-web": "react-scripts start",
-    "build-web": "react-scripts build && echo '/*    /index.html   200' >> build/_redirects",
+    "build-web": "CI= react-scripts build && echo '/*    /index.html   200' >> build/_redirects",
     "b-s": "yarn build-web && serve -s build/",
     "gql": "gql-gen",
     "gql-faker": "graphql-faker --open"
