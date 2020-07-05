@@ -22,6 +22,7 @@ export function uploadImage(file: File | string[]): Promise<any> {
                 if (typeof img === "string") {
                     return img
                 } else {
+                    // @ts-ignore
                     return img.data.data.display_url;
                 }
             }));

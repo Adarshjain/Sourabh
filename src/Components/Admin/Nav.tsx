@@ -31,14 +31,11 @@ export const Nav = () => {
                 if (route.path === selectedPath) {
                     css = {fontWeight: "bold", color: "rgb(51, 102, 255)"}
                 }
-                return <TouchableOpacity
-                    key={route.path} style={{padding: 16}}
-                    onPress={() => onSelectMenu(route.path)}
-                >
+                return <TouchableOpacity key={route.path} style={{padding: 16}}
+                                         onPress={() => onSelectMenu(route.path)}>
                     <Text style={Object.assign({
                         fontSize: 15,
-                        minWidth: 90,
-                        textAlign: "center"
+                        minWidth: 90
                     }, css)}>{route.title}</Text>
                 </TouchableOpacity>
             })}
