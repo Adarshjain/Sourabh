@@ -106,7 +106,7 @@ function CategoryComp({data: {categoriesOne}}: CategoryOneResponse) {
                 <Button size="medium" onPress={onAddNewCategoryAction}>Add Category</Button>
                 {/*<Button size="medium" onPress={() => uploadCategoryOne(mutateOne)}>QA_C1</Button>*/}
                 {/*<Button size="medium" onPress={() => uploadCategoryTwo(mutateTwo,internalCategories)}>QA_C2</Button>*/}
-                <Button size="medium" onPress={() => uploadProducts(mutateProducts,data)}>QA_PROD</Button>
+                {/*<Button size="medium" onPress={() => uploadProducts(mutateProducts,data)}>QA_PROD</Button>*/}
             </View>
             <View style={styles.cardsContainer}>
                 {
