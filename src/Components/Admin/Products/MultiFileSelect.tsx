@@ -16,7 +16,7 @@ export default function MultiFileSelect({images, status, onImagesUpdate}: { imag
             return;
         }
         let all = Array.from(event.target.files);
-        if(all.some(file => !(file.type.startsWith('image') || file.size <= 24000))){
+        if(all.some(file => !(file.type.startsWith('image') || file.size <= 24000000))){
             alert('Some of the files either is not an image or the file size is large. Please check your files.');
             return;
         }

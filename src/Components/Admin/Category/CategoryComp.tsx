@@ -1,21 +1,15 @@
 import React, {useState} from "react";
 import {StyleSheet, View} from "react-native";
-import {useMutation, useQuery} from "@apollo/react-hooks";
+import {useMutation} from "@apollo/react-hooks";
 import {CategoryOne, MutationUpdateCategoryOneArgs} from "../../../types";
 import Category from "../../Common/Category";
-import {
-    DELETE_CATEGORY,
-    FETCH_CATEGORIES, FETCH_SECOND_CATEGORIES,
-    UPDATE_CATEGORY, UPDATE_PRODUCT,
-    UPDATE_SECOND_CATEGORY
-} from "../../../Network/schemaFormats";
+import {DELETE_CATEGORY, FETCH_CATEGORIES, UPDATE_CATEGORY} from "../../../Network/schemaFormats";
 import CategoryEdit from "./CategoryEdit";
 import {Button, Text} from "@ui-kitten/components";
 import GqlQueryWrapper from "../../Common/GqlQueryWrapper";
 import {getSplicedArray, pushToArray, replaceArrayAt} from "../../../libs/Helpers";
 import ConfirmationPopup from "../../Common/ConfirmationPopup";
 import {CategoryOneResponse} from "../../../customTypes";
-import {uploadCategoryOne, uploadCategoryTwo, uploadProducts} from "../../../qa";
 
 export default GqlQueryWrapper(CategoryComp, FETCH_CATEGORIES);
 
@@ -28,8 +22,8 @@ function CategoryComp({data: {categoriesOne}}: CategoryOneResponse) {
     const [deleteCategory] = useMutation<{ deleteCategoryOne: boolean }, { id: string }>(DELETE_CATEGORY);
     // const [mutateOne] = useMutation(UPDATE_CATEGORY);
     // const [mutateTwo] = useMutation(UPDATE_SECOND_CATEGORY);
-    const [mutateProducts] = useMutation(UPDATE_PRODUCT);
-    const {data} = useQuery(FETCH_SECOND_CATEGORIES);
+    // const [mutateProducts] = useMutation(UPDATE_PRODUCT);
+    // const {data} = useQuery(FETCH_SECOND_CATEGORIES);
 
     async function onCategoryUpdate(tempCategory: MutationUpdateCategoryOneArgs) {
         setIsEditPopupVisible(false);

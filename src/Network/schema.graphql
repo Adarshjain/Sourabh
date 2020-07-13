@@ -65,6 +65,12 @@ type Mutation {
   ): Product!
   deleteProduct(id: ID!): Boolean
   updateMisc(key: String!, value: String!): Misc
+  updatePassword(email: String!, password: String!): String
+  login(email: String!, password: String!): User
+}
+
+type User {
+  token: String
 }
 
 type Product {

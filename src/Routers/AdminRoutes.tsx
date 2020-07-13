@@ -4,26 +4,33 @@ import ProductList from "../Components/Admin/Products/ProductList";
 import {Route} from "./routing";
 import React from "react";
 import BannerImages from "../Components/Admin/BannerImages";
+import BoardRate from "../Components/Admin/BoardRate";
 
 export default class AdminRoutes {
     static adminPath = "/"
-    static items = [{
-        title: "Category",
-        path: AdminRoutes.adminPath + "category",
-        component: CategoryComp
-    }, {
-        title: "Sub category",
-        path: AdminRoutes.adminPath + "sub-category",
-        component: SubCategory
-    }, {
-        title: "Products",
-        path: AdminRoutes.adminPath + "products",
-        component: ProductList
-    }, {
-        title: "Banner images",
-        path: AdminRoutes.adminPath + "banner",
-        component: BannerImages
-    }]
+    static items = [
+        {
+            title: "Board Rate",
+            path: AdminRoutes.adminPath + "booard-rate",
+            component: BoardRate
+        },
+        {
+            title: "Category",
+            path: AdminRoutes.adminPath + "category",
+            component: CategoryComp
+        }, {
+            title: "Sub category",
+            path: AdminRoutes.adminPath + "sub-category",
+            component: SubCategory
+        }, {
+            title: "Products",
+            path: AdminRoutes.adminPath + "products",
+            component: ProductList
+        }, {
+            title: "Banner images",
+            path: AdminRoutes.adminPath + "banner",
+            component: BannerImages
+        }]
 
     static get routes() {
         return AdminRoutes.items.map(route => ({

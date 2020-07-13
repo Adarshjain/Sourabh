@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useHistory, useLocation} from "../../Routers/routing";
 import AdminRoutes from "../../Routers/AdminRoutes";
-import {Text, TouchableOpacity, View} from "react-native";
+import {Image, Text, TouchableOpacity, View} from "react-native";
 
 export const Nav = () => {
 
@@ -24,8 +24,15 @@ export const Nav = () => {
         setSelectedPath(path);
     }
 
+    function logout() {
+        localStorage.removeItem('logTok');
+        history.push('/login');
+    }
+
     return (
-        <View style={{width: '100%', display: "flex", flexDirection: "row"}}>
+        <View style={{width: '100%', display: "flex", flexDirection: "row", alignItems: "center"}}>
+            <Image source={{uri: require("../../images/logo.png")}} style={{width: 55, height: 64, marginLeft: 24}}/>
+
             {adminRoutes.map(route => {
                 let css = {};
                 if (route.path === selectedPath) {
@@ -35,10 +42,16 @@ export const Nav = () => {
                                          onPress={() => onSelectMenu(route.path)}>
                     <Text style={Object.assign({
                         fontSize: 15,
-                        minWidth: 90
                     }, css)}>{route.title}</Text>
                 </TouchableOpacity>
             })}
+            <TouchableOpacity key="logout" style={{padding: 16}}
+                              onPress={() => logout()}>
+                <Text style={Object.assign({
+                    fontSize: 15,
+                    marginLeft: "auto"
+                })}>Logout</Text>
+            </TouchableOpacity>
         </View>
     );
 };

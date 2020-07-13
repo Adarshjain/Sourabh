@@ -18,6 +18,8 @@ export interface MiscResponse {
 
 export interface MISC {
     BANNER_IMAGES?: string
+    BOARD_RATE?: string
 }
 
 export const BANNER_IMAGES = "BANNER_IMAGES";
+export const BOARD_RATE = "BOARD_RATE";

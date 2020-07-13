@@ -3,19 +3,25 @@ import React from "react";
 import {StyleSheet, View} from "react-native";
 import {Nav} from "./Nav";
 import AdminRoutes from "../../Routers/AdminRoutes";
-import {Switch} from "../../Routers/routing";
+import {Switch, useHistory} from "../../Routers/routing";
 
 const Admin = () => {
-    return (
-        <Layout style={styles.container}>
-            <View style={styles.nav}><Nav/></View>
-            <View style={styles.adminArea}>
-                <Switch>
-                    {AdminRoutes.routes.map(route => route.component())}
-                </Switch>
-            </View>
-        </Layout>
-    )
+    let history = useHistory();
+    if (localStorage.getItem('logTok') !== null) {
+        return (
+            <Layout style={styles.container}>
+                <View style={styles.nav}><Nav/></View>
+                <View style={styles.adminArea}>
+                    <Switch>
+                        {AdminRoutes.routes.map(route => route.component())}
+                    </Switch>
+                </View>
+            </Layout>
+        )
+    } else {
+        history.push('/login');
+        return <></>;
+    }
 }
 export default Admin;
 

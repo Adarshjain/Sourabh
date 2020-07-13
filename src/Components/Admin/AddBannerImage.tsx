@@ -68,7 +68,7 @@ export default function AddBannerImage({onPrimaryAction, onSecondaryAction, visi
             alert('The file selected is not an image.');
             return;
         }
-        if (event.target.files[0].size > 24000) {
+        if (event.target.files[0].size > 24000000) {
             alert('file size is large.');
             return;
         }

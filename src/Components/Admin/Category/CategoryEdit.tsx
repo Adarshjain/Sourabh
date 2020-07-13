@@ -82,7 +82,7 @@ export default function CategoryEdit({onPrimaryAction, onSecondaryAction, name, 
             alert('The file selected is not an image.');
             return;
         }
-        if (event.target.files[0].size > 24000) {
+        if (event.target.files[0].size > 24000000) {
             alert('file size is large.');
             return;
         }

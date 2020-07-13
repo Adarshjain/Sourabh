@@ -51,6 +51,8 @@ export type Mutation = {
   updateProduct: Product;
   deleteProduct?: Maybe<Scalars['Boolean']>;
   updateMisc?: Maybe<Misc>;
+  updatePassword?: Maybe<Scalars['String']>;
+  login?: Maybe<User>;
 };
 
 
@@ -110,6 +112,23 @@ export type MutationDeleteProductArgs = {
 export type MutationUpdateMiscArgs = {
   key: Scalars['String'];
   value: Scalars['String'];
+};
+
+
+export type MutationUpdatePasswordArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type MutationLoginArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type User = {
+  __typename?: 'User';
+  token?: Maybe<Scalars['String']>;
 };
 
 export type Product = {

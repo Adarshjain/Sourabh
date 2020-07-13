@@ -7,6 +7,7 @@ import {EvaIconsPack} from "@ui-kitten/eva-icons";
 import client from "./Network/Apollo/client";
 import {ApolloProvider} from '@apollo/react-hooks';
 import {View} from "react-native";
+import Login from "./Components/Login";
 
 const HybridApp = function () {
     const Admin = lazy(() => import('./Components/Admin/Admin'));
@@ -18,16 +19,9 @@ const HybridApp = function () {
                 <ApolloProvider client={client}>
                     <Router>
                         <Switch>
-                            {/*<Route exact path="/" render={*/}
-                            {/*    props => <Suspense fallback={<View style={{*/}
-                            {/*        width: "100%",*/}
-                            {/*        height: "100%",*/}
-                            {/*        alignItems: "center",*/}
-                            {/*        justifyContent: "center"*/}
-                            {/*    }}>*/}
-                            {/*        <Spinner size="large"/>*/}
-                            {/*    </View>}><Index {...props} /></Suspense>*/}
-                            {/*}/>*/}
+                            <Route path="/login" exact>
+                                <Login />
+                            </Route>
                             <Route path="/" render={
                                 props => <Suspense fallback={<View style={{
                                     width: "100%",

@@ -222,3 +222,17 @@ export const UPDATE_MISC = gql`
         }
     }
 `;
+
+export const LOGIN = gql`
+    mutation login($email: String!, $password: String!){
+        login(email: $email, password: $password){
+            token
+        }
+    }
+`;
+
+export const UPDATE_PASSWORD = gql`
+    mutation updatePassword($email: String!, $password: String!){
+        updatePassword(email: $email, password: $password)
+    }
+`;
