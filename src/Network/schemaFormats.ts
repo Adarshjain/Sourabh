@@ -72,6 +72,12 @@ export const UPDATE_SECOND_CATEGORY = gql`
             imageUrl
             name
             orderOfDisplay
+            categoryOne {
+                id
+                imageUrl
+                name
+                orderOfDisplay
+            }
         }
     }
 `;
