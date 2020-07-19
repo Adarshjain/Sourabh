@@ -137,7 +137,7 @@ export const UPDATE_PRODUCT = gql`
         $categoryTwo: ID!
         $price: Float
         $favorite: Boolean
-        $image: [String]
+        $images: [String]
         $weight: String
         $purity: String
         $gender: String
@@ -156,7 +156,7 @@ export const UPDATE_PRODUCT = gql`
             categoryTwo: $categoryTwo
             price: $price
             favorite: $favorite
-            images: $image
+            images: $images
             weight: $weight
             purity: $purity
             gender: $gender
@@ -170,6 +170,7 @@ export const UPDATE_PRODUCT = gql`
             id
             name
             description
+            images
             categoryOne{
                 id
                 imageUrl
@@ -199,7 +200,6 @@ export const UPDATE_PRODUCT = gql`
             isHidden
             isFeatured
             isTrending
-            images
         }
     }
 `;

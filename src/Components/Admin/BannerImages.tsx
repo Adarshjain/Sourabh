@@ -55,7 +55,7 @@ function BannerImages({data: {findMisc}}: MiscResponse) {
         if (internalMisc.BANNER_IMAGES) {
             let resp = JSON.parse(internalMisc.BANNER_IMAGES)
                 .filter(Boolean)
-                .sort((objA, objB) => objA.orderOfDisplay < objB.orderOfDisplay)
+                .sort((objB, objA) => objA.orderOfDisplay - objB.orderOfDisplay)
             resp.splice(currIndex, 1);
             let misc = await updateMisc({
                 variables: {

@@ -82,10 +82,6 @@ export default function ProductEdit(
         }
     }, [internalName, internalImages, internalWeight, internalSize, selectedCategoryOne, selectedCategoryTwo]);
 
-    useEffect(() => {
-        setCategoryTwo(undefined);
-    }, [selectedCategoryOne]);
-
     async function onUpdate() {
         let hasError = false;
         if (internalName === "") {
@@ -110,7 +106,7 @@ export default function ProductEdit(
         }
         if (!selectedCategoryTwo) {
             setSelectedCategoryTwoState("danger");
-            // hasError = true;
+            hasError = true;
         }
         if (hasError) {
             return;
