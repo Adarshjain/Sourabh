@@ -115,6 +115,8 @@ export const FETCH_PRODUCTS = gql`
             price
             favorite
             weight
+            grossWeight
+            netWeight
             purity
             gender
             size
@@ -139,6 +141,8 @@ export const UPDATE_PRODUCT = gql`
         $favorite: Boolean
         $images: [String]
         $weight: String
+        $grossWeight: String
+        $netWeight: String
         $purity: String
         $gender: String
         $size: String
@@ -158,6 +162,8 @@ export const UPDATE_PRODUCT = gql`
             favorite: $favorite
             images: $images
             weight: $weight
+            grossWeight: $grossWeight
+            netWeight: $netWeight
             purity: $purity
             gender: $gender
             size: $size
@@ -200,6 +206,8 @@ export const UPDATE_PRODUCT = gql`
             isHidden
             isFeatured
             isTrending
+            netWeight
+            grossWeight
         }
     }
 `;

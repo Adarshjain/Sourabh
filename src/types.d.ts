@@ -93,6 +93,8 @@ export type MutationUpdateProductArgs = {
   favorite?: Maybe<Scalars['Boolean']>;
   images?: Maybe<Array<Maybe<Scalars['String']>>>;
   weight?: Maybe<Scalars['String']>;
+  grossWeight?: Maybe<Scalars['String']>;
+  netWeight?: Maybe<Scalars['String']>;
   purity?: Maybe<Scalars['String']>;
   gender?: Maybe<Scalars['String']>;
   size?: Maybe<Scalars['String']>;
@@ -141,6 +143,8 @@ export type Product = {
   price?: Maybe<Scalars['Float']>;
   favorite?: Maybe<Scalars['Boolean']>;
   weight?: Maybe<Scalars['String']>;
+  grossWeight?: Maybe<Scalars['String']>;
+  netWeight?: Maybe<Scalars['String']>;
   purity?: Maybe<Scalars['String']>;
   gender?: Maybe<Scalars['String']>;
   size?: Maybe<Scalars['String']>;

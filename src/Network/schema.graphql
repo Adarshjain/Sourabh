@@ -54,6 +54,8 @@ type Mutation {
     favorite: Boolean
     images: [String]
     weight: String
+    grossWeight: String
+    netWeight: String
     purity: String
     gender: String
     size: String
@@ -82,6 +84,8 @@ type Product {
   price: Float
   favorite: Boolean
   weight: String
+  grossWeight: String
+  netWeight: String
   purity: String
   gender: String
   size: String

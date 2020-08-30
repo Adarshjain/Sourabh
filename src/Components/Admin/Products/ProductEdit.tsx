@@ -17,6 +17,8 @@ interface Props {
     price?: number;
     images?: (string | undefined)[];
     weight?: string;
+    netWeight?: string;
+    grossWeight?: string;
     purity?: string;
     gender?: string;
     size?: string;
@@ -32,13 +34,14 @@ interface Props {
 
 export default function ProductEdit(
     {
-        name, gender, isHallmark, isHidden, purity, size, weight, visible, onPrimaryAction, onSecondaryAction,
-        images, categoriesOne, categoriesTwo, categoryOne, categoryTwo, description, isFeatured, isTrending
+        name, gender, isHallmark, isHidden, purity, size, visible, onPrimaryAction, onSecondaryAction,
+        images, categoriesOne, categoriesTwo, categoryOne, categoryTwo, description, isFeatured, isTrending, netWeight, grossWeight
     }: Props
 ) {
     //Data states
     const [internalName, setName] = React.useState<string>(name || '');
-    const [internalWeight, setWeight] = React.useState<string>(weight || '');
+    const [internalNetWeight, setNetWeight] = React.useState<string>(netWeight || '');
+    const [internalGrossWeight, setGrossWeight] = React.useState<string>(grossWeight || '');
     const [internalPurity, setPurity] = React.useState<string>(purity || '');
     const [internalGender, setGender] = React.useState<string>(gender || '');
     const [internalSize, setSize] = React.useState<string>(size || '');
@@ -68,9 +71,6 @@ export default function ProductEdit(
         if (internalImages.length > 0) {
             setImagesState("basic");
         }
-        if (internalWeight !== "") {
-            setInternalWeightState("basic");
-        }
         if (internalSize !== "") {
             setInternalSizeState("basic");
         }
@@ -80,7 +80,7 @@ export default function ProductEdit(
         if (!!selectedCategoryTwo) {
             setSelectedCategoryTwoState("basic");
         }
-    }, [internalName, internalImages, internalWeight, internalSize, selectedCategoryOne, selectedCategoryTwo]);
+    }, [internalName, internalImages, internalSize, selectedCategoryOne, selectedCategoryTwo]);
 
     async function onUpdate() {
         let hasError = false;
@@ -90,14 +90,6 @@ export default function ProductEdit(
         }
         if (internalImages.length === 0) {
             setImagesState("danger");
-            hasError = true;
-        }
-        if (internalWeight === "") {
-            setInternalWeightState("danger");
-            hasError = true;
-        }
-        if (internalSize === "") {
-            setInternalSizeState("danger");
             hasError = true;
         }
         if (!selectedCategoryOne) {
@@ -130,7 +122,8 @@ export default function ProductEdit(
                 isTrending: internalIsTrending,
                 purity: internalPurity,
                 size: internalSize,
-                weight: internalWeight
+                netWeight: internalNetWeight,
+                grossWeight: internalGrossWeight,
             });
         }
     }
@@ -209,45 +202,39 @@ export default function ProductEdit(
                                 status={internalNameState}
                                 onChangeText={name => setName(name)}
                             />
-                            <label>
-                                <Text style={{
-                                    color: 'rgb(143, 155, 179)',
-                                    fontSize: 12,
-                                    fontWeight: '800',
-                                    marginBottom: '4px'
-                                }}>Description</Text>
-                                <textarea
-                                    onChange={e => setDesc(e.target.value)}
-                                    value={internalDesc}
-                                    style={{
-                                        width: "100%",
-                                        borderColor: "rgb(228, 233, 242)",
-                                        borderRadius: '4px',
-                                        borderWidth: '1px',
-                                        minHeight: '40px',
-                                        padding: 8,
-                                        backgroundColor: "rgb(247, 249, 252)",
-                                        fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif'
-                                    }}/>
-                            </label>
-                            {/*Weight & Purity*/}
+                            <Text style={{
+                                color: 'rgb(143, 155, 179)',
+                                fontSize: 12,
+                                fontWeight: '800',
+                                marginBottom: '4px'
+                            }}>Description</Text>
+                            <Input
+                                onChangeText={e => setDesc(e)}
+                                value={internalDesc}
+                            />
+                            {/*Weight*/}
                             <View style={{flexDirection: "row"}}>
                                 <Input
                                     style={[styles.input, {width: "calc(50% - 12px)", marginRight: 12}]}
-                                    value={internalWeight}
-                                    label='Weight'
+                                    value={internalNetWeight}
+                                    label='Net Weight'
                                     status={internalWeightState}
-                                    onChangeText={value => setWeight(value)}
-                                    keyboardType="numeric"
-                                    caption="Weight in grams"
+                                    onChangeText={value => setNetWeight(value)}
                                 />
+                                <Input
+                                    style={[styles.input, {width: "calc(50% - 12px)", marginRight: 12}]}
+                                    value={internalGrossWeight}
+                                    label='Gross Weight'
+                                    status={internalWeightState}
+                                    onChangeText={value => setGrossWeight(value)}
+                                />
+                            </View>
                                 <Input
                                     style={[styles.input, {width: "50%"}]}
                                     value={internalPurity}
                                     label='Purity'
                                     onChangeText={value => setPurity(value)}
                                 />
-                            </View>
                             {/*Gender */}
                             <View style={{display: "flex", flexDirection: "row", marginBottom: 12}}>
                                 <Text style={{
@@ -285,7 +272,6 @@ export default function ProductEdit(
                                 value={internalSize}
                                 status={internalSizeState}
                                 label='Size'
-                                keyboardType="numeric"
                                 onChangeText={size => setSize(size)}
                             />
                             <View style={{flexDirection: "row", marginBottom: 12}}>
